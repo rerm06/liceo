@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Trabajo Estratégico - Liceo de Arte y Tecnología</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm 2cm 3cm 2cm;
+            @top-center {
+                content: "Liceo de Arte y Tecnología de Puerto Rico - Plan de Trabajo Estratégico";
+                font-family: 'Arial', sans-serif;
+                font-size: 9pt;
+                color: #4CAF50;
+                border-bottom: 1px solid #4CAF50;
+                padding-bottom: 5px;
+            }
+            @bottom-center {
+                content: "Página " counter(page);
+                font-family: 'Arial', sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-container {
+            margin-bottom: 15px;
+        }
+        
+        .institution-name {
+            color: #4CAF50;
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .document-title {
+            color: #2E7D32;
+            font-size: 24pt;
+            font-weight: bold;
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+        
+        .document-subtitle {
+            color: #666;
+            font-size: 14pt;
+            margin-bottom: 20px;
+        }
+        
+        .document-info {
+            background: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .document-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .document-info td {
+            padding: 5px 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .document-info td:first-child {
+            font-weight: bold;
+            color: #2E7D32;
+            width: 30%;
+        }
+        
+        h1 {
+            color: #2E7D32;
+            font-size: 18pt;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #4CAF50;
+            font-size: 14pt;
+            margin-top: 25px;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            font-size: 12pt;
+            margin-top: 20px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .footer-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #4CAF50;
+            text-align: center;
+            color: #666;
+            font-size: 10pt;
+        }
+        
+        .signature-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-top: 1px solid #333;
+            width: 300px;
+            margin: 40px auto 10px auto;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .timeline-table {
+            font-size: 9pt;
+        }
+        
+        .timeline-table th {
+            background: #2E7D32;
+        }
+        
+        .phase-header {
+            background: #4CAF50 !important;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="institution-name">LICEO DE ARTE Y TECNOLOGÍA DE PUERTO RICO</div>
+        <div class="document-title">Plan de Trabajo Estratégico</div>
+        <div class="document-subtitle">Proceso de Reacreditación ACCSC 2025-2026</div>
+    </div>
+    
+    <div class="document-info">
+        <table>
+            <tr>
+                <td>Institución:</td>
+                <td>Liceo de Arte y Tecnología de Puerto Rico</td>
+            </tr>
+            <tr>
+                <td>Dirección:</td>
+                <td>Av. Juan Ponce de León 405, San Juan, Puerto Rico 00918</td>
+            </tr>
+            <tr>
+                <td>Teléfono:</td>
+                <td>(787) 999-2473</td>
+            </tr>
+            <tr>
+                <td>Sitio Web:</td>
+                <td>https://www.liceo.edu/</td>
+            </tr>
+            <tr>
+                <td>Preparado por:</td>
+                <td>René E. Rey Meléndez, Director Académico</td>
+            </tr>
+            <tr>
+                <td>Fecha:</td>
+                <td>Julio 2025</td>
+            </tr>
+            <tr>
+                <td>Período de Ejecución:</td>
+                <td>Julio 2025 - Enero 2026</td>
+            </tr>
+            <tr>
+                <td>Visita de Evaluación:</td>
+                <td>Enero 2026</td>
+            </tr>
+        </table>
+    </div>
+
+    <h1>RESUMEN EJECUTIVO</h1>
+    
+    <div class="section">
+        <p>Como Director Académico del Liceo de Arte y Tecnología de Puerto Rico, presento este Plan de Trabajo Estratégico que guiará nuestro proceso de reacreditación ante la Accrediting Commission of Career Schools and Colleges (ACCSC) durante el período julio 2025 - enero 2026. Este plan establece una metodología rigurosa que integra el análisis de datos reales con la planificación estratégica para garantizar la excelencia y el cumplimiento.</p>
+        
+        <p>El Liceo de Arte y Tecnología, con cerca de 60 años de historia educativa en Puerto Rico, se encuentra en una posición sólida para la renovación de su acreditación ACCSC. Nuestra institución, reconocida como ACCSC School of Distinction 2022-2023, ofrece 10 programas académicos distribuidos en tres divisiones: Arte, Belleza y Tecnología, sirviendo a aproximadamente 495 estudiantes en nuestras modernas instalaciones ubicadas en la Av. Juan Ponce de León 405, San Juan, Puerto Rico.</p>
+        
+        <p>Este plan estratégico establece un cronograma detallado de seis meses que incluye la formación de comités especializados, la recopilación y análisis de evidencias, la preparación del Informe de Autoevaluación (Self-Evaluation Report - SER), y la preparación exhaustiva para la visita de evaluación in situ. Cada fase del proceso ha sido diseñada para demostrar nuestro cumplimiento excepcional con los estándares ACCSC y nuestro compromiso continuo con la excelencia educativa.</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1>CONTEXTO INSTITUCIONAL</h1>
+    
+    <h2>Historia y Trayectoria</h2>
+    <div class="section">
+        <p>El Liceo de Arte y Tecnología fue fundado en 1964, estableciendo una tradición de excelencia educativa que se extiende por casi seis décadas. Nuestra evolución institucional refleja un compromiso constante con la innovación y la adaptación a las necesidades del mercado laboral puertorriqueño:</p>
+        
+        <ul>
+            <li><strong>1964:</strong> Fundación del Liceo de Arte y Tecnología</li>
+            <li><strong>1992:</strong> Relocalización a las facilidades actuales en Hato Rey</li>
+            <li><strong>2009:</strong> Integración de tecnología de energía renovable en programas técnicos</li>
+            <li><strong>2012:</strong> Lanzamiento del programa de Diseño Gráfico</li>
+            <li><strong>2013:</strong> Inicio de programas de Cinematografía Digital e Ingeniería de Audio y Producción Musical</li>
+            <li><strong>2017:</strong> Expansión con programas de Cosmetología, Barbería y Técnica de Uñas</li>
+            <li><strong>2020:</strong> Incorporación del programa innovador de Pet Grooming con Entrenamiento de Perros</li>
+        </ul>
+    </div>
+
+    <h2>Misión y Visión Institucional</h2>
+    <div class="highlight-box">
+        <p><strong>Misión:</strong> El Liceo de Arte y Tecnología tiene como misión preparar profesionales con el fin de que se empleen en el área que eligieron, ofreciendo una experiencia educativa de excelencia y ubicando al individuo como centro de la formación profesional.</p>
+        
+        <p><strong>Visión:</strong> Alcanzar ser la mejor institución educativa de currículo técnico-vocacional con altas destrezas.</p>
+    </div>
+
+    <h2>Acreditación y Reconocimientos</h2>
+    <div class="section">
+        <p>Nuestra institución mantiene una acreditación vigente con la Accrediting Commission of Career Schools and Colleges (ACCSC), agencia reconocida por el Departamento de Educación de Estados Unidos. El reconocimiento como ACCSC School of Distinction 2022-2023 subraya nuestro compromiso con la calidad educativa y el cumplimiento excepcional de los estándares de acreditación.</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1>CRONOGRAMA ESTRATÉGICO DE REACREDITACIÓN</h1>
+    
+    <h2>Tabla Maestra de Planificación (Julio 2025 - Enero 2026)</h2>
+    
+    <table class="timeline-table">
+        <thead>
+            <tr>
+                <th>Fase</th>
+                <th>Período</th>
+                <th>Actividades Principales</th>
+                <th>Responsable</th>
+                <th>Entregables</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="phase-header">
+                <td colspan="5">FASE I: ORGANIZACIÓN Y PLANIFICACIÓN</td>
+            </tr>
+            <tr>
+                <td>Fase I</td>
+                <td>Julio 2025</td>
+                <td>
+                    • Formación del Comité de Reacreditación<br>
+                    • Designación de Coordinadores por División<br>
+                    • Capacitación en Estándares ACCSC
+                </td>
+                <td>Director Académico</td>
+                <td>
+                    • Plan de Trabajo aprobado<br>
+                    • Comités constituidos<br>
+                    • Cronograma detallado
+                </td>
+            </tr>
+            <tr class="phase-header">
+                <td colspan="5">FASE II: RECOPILACIÓN DE EVIDENCIAS</td>
+            </tr>
+            <tr>
+                <td>Fase II</td>
+                <td>Agosto 2025</td>
+                <td>
+                    • Auditoría de Documentos Institucionales<br>
+                    • Recopilación de Datos de Retención<br>
+                    • Análisis de Tasas de Graduación<br>
+                    • Encuestas de Satisfacción
+                </td>
+                <td>Coordinadores de División</td>
+                <td>
+                    • Base de datos actualizada<br>
+                    • Documentos auditados<br>
+                    • Reportes de retención
+                </td>
+            </tr>
+            <tr class="phase-header">
+                <td colspan="5">FASE III: ANÁLISIS Y EVALUACIÓN</td>
+            </tr>
+            <tr>
+                <td>Fase III</td>
+                <td>Septiembre 2025</td>
+                <td>
+                    • Evaluación de Cumplimiento por Estándar<br>
+                    • Identificación de Áreas de Mejora<br>
+                    • Desarrollo de Planes de Acción<br>
+                    • Validación de Datos
+                </td>
+                <td>Comité de Reacreditación</td>
+                <td>
+                    • Análisis de cumplimiento<br>
+                    • Planes de mejora<br>
+                    • Datos validados
+                </td>
+            </tr>
+            <tr class="phase-header">
+                <td colspan="5">FASE IV: PREPARACIÓN DEL SER</td>
+            </tr>
+            <tr>
+                <td>Fase IV</td>
+                <td>Octubre 2025</td>
+                <td>
+                    • Redacción de Narrativas por Estándar<br>
+                    • Compilación de Carpeta de Evidencias<br>
+                    • Revisión y Edición del SER<br>
+                    • Validación Externa
+                </td>
+                <td>Director Académico</td>
+                <td>
+                    • SER completo<br>
+                    • Carpeta de evidencias<br>
+                    • Documentos revisados
+                </td>
+            </tr>
+            <tr class="phase-header">
+                <td colspan="5">FASE V: PREPARACIÓN PARA VISITA</td>
+            </tr>
+            <tr>
+                <td>Fase V</td>
+                <td>Noviembre 2025</td>
+                <td>
+                    • Simulacro de Visita de Evaluación<br>
+                    • Capacitación de Personal<br>
+                    • Preparación de Facilidades<br>
+                    • Finalización de Documentación
+                </td>
+                <td>Equipo Directivo</td>
+                <td>
+                    • Personal capacitado<br>
+                    • Facilidades preparadas<br>
+                    • Documentación final
+                </td>
+            </tr>
+            <tr class="phase-header">
+                <td colspan="5">FASE VI: ENVÍO Y SEGUIMIENTO</td>
+            </tr>
+            <tr>
+                <td>Fase VI</td>
+                <td>Diciembre 2025</td>
+                <td>
+                    • Envío Oficial del SER a ACCSC<br>
+                    • Confirmación de Recepción<br>
+                    • Preparación Final para Visita<br>
+                    • Coordinación Logística
+                </td>
+                <td>Director Académico</td>
+                <td>
+                    • SER enviado<br>
+                    • Confirmación recibida<br>
+                    • Logística coordinada
+                </td>
+            </tr>
+            <tr class="phase-header">
+                <td colspan="5">FASE VII: VISITA DE EVALUACIÓN</td>
+            </tr>
+            <tr>
+                <td>Fase VII</td>
+                <td>Enero 2026</td>
+                <td>
+                    • Recepción del Equipo Evaluador<br>
+                    • Presentaciones y Entrevistas<br>
+                    • Recorridos y Demostraciones<br>
+                    • Sesión de Cierre
+                </td>
+                <td>Toda la Institución</td>
+                <td>
+                    • Visita exitosa<br>
+                    • Evaluación completada<br>
+                    • Retroalimentación recibida
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h1>METODOLOGÍA DE TRABAJO</h1>
+    
+    <h2>Enfoque Estratégico</h2>
+    <div class="section">
+        <p>Nuestro enfoque metodológico se fundamenta en los principios de mejora continua, transparencia y participación colaborativa. El proceso de reacreditación será conducido bajo un marco de trabajo que integra:</p>
+        
+        <ul>
+            <li><strong>Análisis Basado en Evidencias:</strong> Cada estándar será evaluado utilizando datos cuantitativos y cualitativos verificables</li>
+            <li><strong>Participación Multidisciplinaria:</strong> Involucraremos a todo el personal académico y administrativo en el proceso</li>
+            <li><strong>Mejora Continua:</strong> Identificaremos oportunidades de fortalecimiento institucional</li>
+            <li><strong>Transparencia:</strong> Mantendremos comunicación abierta con todos los stakeholders</li>
+        </ul>
+    </div>
+
+    <h2>Estructura Organizacional del Proceso</h2>
+    <div class="section">
+        <p>Para garantizar el éxito del proceso de reacreditación, hemos establecido una estructura organizacional clara con roles y responsabilidades definidos:</p>
+        
+        <h3>Comité Ejecutivo de Reacreditación</h3>
+        <ul>
+            <li><strong>Presidente:</strong> René E. Rey Meléndez, Director Académico</li>
+            <li><strong>Coordinador de Arte:</strong> Prof. María E. Santos</li>
+            <li><strong>Coordinador de Belleza:</strong> Prof. Carmen L. Rodríguez</li>
+            <li><strong>Coordinador de Tecnología:</strong> Prof. José M. Rivera</li>
+            <li><strong>Coordinador de Servicios Estudiantiles:</strong> Lcda. Ana I. Morales</li>
+        </ul>
+        
+        <h3>Subcomités Especializados</h3>
+        <ul>
+            <li><strong>Subcomité de Efectividad Estudiantil:</strong> Análisis de datos de retención, graduación y colocación</li>
+            <li><strong>Subcomité de Recursos Académicos:</strong> Evaluación de facultad, currículo y recursos educativos</li>
+            <li><strong>Subcomité de Servicios de Apoyo:</strong> Revisión de servicios estudiantiles y administrativos</li>
+            <li><strong>Subcomité de Gestión Institucional:</strong> Análisis de políticas, procedimientos y gobernanza</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h1>GESTIÓN DE RIESGOS Y CONTINGENCIAS</h1>
+    
+    <div class="section">
+        <p>Hemos identificado los principales riesgos que podrían afectar el proceso de reacreditación y desarrollado estrategias de mitigación correspondientes:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Riesgo Identificado</th>
+                    <th>Probabilidad</th>
+                    <th>Impacto</th>
+                    <th>Estrategia de Mitigación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Retrasos en recopilación de datos</td>
+                    <td>Media</td>
+                    <td>Alto</td>
+                    <td>Cronograma con buffers de tiempo, equipos de respaldo</td>
+                </tr>
+                <tr>
+                    <td>Cambios en estándares ACCSC</td>
+                    <td>Baja</td>
+                    <td>Alto</td>
+                    <td>Monitoreo continuo de actualizaciones ACCSC</td>
+                </tr>
+                <tr>
+                    <td>Disponibilidad de personal clave</td>
+                    <td>Media</td>
+                    <td>Medio</td>
+                    <td>Entrenamiento cruzado, documentación detallada</td>
+                </tr>
+                <tr>
+                    <td>Problemas técnicos con sistemas</td>
+                    <td>Baja</td>
+                    <td>Medio</td>
+                    <td>Respaldos múltiples, sistemas alternativos</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h1>PRESUPUESTO Y RECURSOS</h1>
+    
+    <div class="section">
+        <p>El proceso de reacreditación requiere una inversión significativa en recursos humanos, tecnológicos y materiales. Hemos desarrollado un presupuesto detallado que incluye:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th>Costo Estimado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Personal</td>
+                    <td>Tiempo dedicado de coordinadores y comités</td>
+                    <td>$25,000</td>
+                </tr>
+                <tr>
+                    <td>Consultoría Externa</td>
+                    <td>Revisión independiente del SER</td>
+                    <td>$8,000</td>
+                </tr>
+                <tr>
+                    <td>Tecnología</td>
+                    <td>Software de gestión documental y análisis</td>
+                    <td>$3,500</td>
+                </tr>
+                <tr>
+                    <td>Materiales</td>
+                    <td>Impresión, encuadernación, suministros</td>
+                    <td>$2,000</td>
+                </tr>
+                <tr>
+                    <td>Visita de Evaluación</td>
+                    <td>Hospedaje, alimentación, transporte evaluadores</td>
+                    <td>$12,000</td>
+                </tr>
+                <tr>
+                    <td>Contingencia (10%)</td>
+                    <td>Gastos imprevistos</td>
+                    <td>$5,050</td>
+                </tr>
+                <tr style="background: #4CAF50; color: white; font-weight: bold;">
+                    <td colspan="2">TOTAL</td>
+                    <td>$55,550</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h1>INDICADORES DE ÉXITO</h1>
+    
+    <div class="section">
+        <p>El éxito del proceso de reacreditación será medido a través de los siguientes indicadores clave:</p>
+        
+        <h2>Indicadores Cuantitativos</h2>
+        <ul>
+            <li>100% de cumplimiento con cronograma establecido</li>
+            <li>Renovación exitosa de acreditación ACCSC</li>
+            <li>Cero hallazgos críticos en la visita de evaluación</li>
+            <li>95% de satisfacción del equipo evaluador con la organización del proceso</li>
+        </ul>
+        
+        <h2>Indicadores Cualitativos</h2>
+        <ul>
+            <li>Fortalecimiento de la cultura de mejora continua institucional</li>
+            <li>Mayor integración entre divisiones académicas</li>
+            <li>Mejora en procesos de documentación y gestión de calidad</li>
+            <li>Reconocimiento externo de excelencia educativa</li>
+        </ul>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-line"></div>
+        <p><strong>René E. Rey Meléndez</strong><br>
+        Director Académico<br>
+        Liceo de Arte y Tecnología de Puerto Rico</p>
+        
+        <p style="margin-top: 30px;">Fecha: _______________</p>
+    </div>
+
+    <div class="footer-info">
+        <p><strong>Liceo de Arte y Tecnología de Puerto Rico</strong></p>
+        <p>Comprometidos con la Excelencia Educativa desde 1964</p>
+        <p>ACCSC School of Distinction 2022-2023</p>
+        <p>Av. Juan Ponce de León 405, San Juan, Puerto Rico 00918 | Tel: (787) 999-2473</p>
+        <p>www.liceo.edu</p>
+    </div>
+</body>
+</html>
+

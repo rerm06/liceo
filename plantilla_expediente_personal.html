@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expediente de Credenciales del Personal - Liceo de Arte y Tecnología</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+            @top-center {
+                content: "CONFIDENCIAL - Expediente de Personal";
+                font-family: Arial, sans-serif;
+                font-size: 10pt;
+                color: #4CAF50;
+            }
+            @bottom-center {
+                content: "Página " counter(page) " de " counter(pages);
+                font-family: Arial, sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .institution-name {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+
+        .document-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .confidential-notice {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .evidence-code {
+            background: #f5f5f5;
+            border-left: 4px solid #4CAF50;
+            padding: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        .employee-header {
+            background: #f0f8f0;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            gap: 20px;
+        }
+
+        .employee-info h3 {
+            color: #4CAF50;
+            margin: 0 0 10px 0;
+            font-size: 16pt;
+        }
+
+        .photo-placeholder {
+            width: 150px;
+            height: 180px;
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .info-item {
+            margin: 10px 0;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #4CAF50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .education-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .education-table th,
+        .education-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .education-table th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .education-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .certification-box {
+            background: #fff8f0;
+            border: 1px solid #FF6B35;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .certification-title {
+            font-weight: bold;
+            color: #FF6B35;
+            margin-bottom: 5px;
+        }
+
+        .experience-item {
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .experience-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 12pt;
+        }
+
+        .experience-company {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .experience-dates {
+            color: #666;
+            font-style: italic;
+        }
+
+        .evaluation-summary {
+            background: #e8f5e8;
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .rating-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .rating-score {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .rating-label {
+            font-size: 9pt;
+            color: #666;
+        }
+
+        .footer-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 10pt;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="institution-name">LICEO DE ARTE Y TECNOLOGÍA DE PUERTO RICO</div>
+        <div class="document-title">EXPEDIENTE DE CREDENCIALES DEL PERSONAL</div>
+    </div>
+
+    <div class="confidential-notice">
+        DOCUMENTO CONFIDENCIAL - SOLO PARA USO ADMINISTRATIVO Y PROCESO DE ACREDITACIÓN
+    </div>
+
+    <div class="evidence-code">
+        <strong>Código de Evidencia:</strong> III-A-1<br>
+        <strong>Estándar ACCSC:</strong> Estándar III - Facultad y Personal<br>
+        <strong>Tipo de Evidencia:</strong> Simulada (Basada en requisitos de programas reales)<br>
+        <strong>Páginas:</strong> 85 (Expedientes completos de todo el personal)
+    </div>
+
+    <div class="employee-header">
+        <div class="employee-info">
+            <h3>Prof. Carlos A. Martínez Rivera</h3>
+            <div class="info-item">
+                <span class="info-label">Posición:</span>
+                Instructor Principal - Ingeniería de Audio
+            </div>
+            <div class="info-item">
+                <span class="info-label">Departamento:</span>
+                Tecnología de Audio
+            </div>
+            <div class="info-item">
+                <span class="info-label">Fecha de Contratación:</span>
+                15 de agosto, 2019
+            </div>
+            <div class="info-item">
+                <span class="info-label">Estatus:</span>
+                Tiempo Completo - Permanente
+            </div>
+        </div>
+        <div class="photo-placeholder">
+            [Fotografía del Empleado]
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">I. INFORMACIÓN PERSONAL</div>
+        
+        <div class="info-grid">
+            <div>
+                <div class="info-item">
+                    <span class="info-label">Número de Empleado:</span>
+                    LAT-2019-045
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Seguro Social:</span>
+                    ***-**-4567 (Confidencial)
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Fecha de Nacimiento:</span>
+                    12 de marzo, 1985
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Dirección:</span>
+                    Urb. Villa Nevarez, Calle 15 #234<br>
+                    San Juan, PR 00927
+                </div>
+            </div>
+            <div>
+                <div class="info-item">
+                    <span class="info-label">Teléfono:</span>
+                    (787) 555-0123
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email Institucional:</span>
+                    cmartinez@liceo.edu
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email Personal:</span>
+                    carlos.martinez.audio@gmail.com
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Estado Civil:</span>
+                    Casado
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">II. EDUCACIÓN FORMAL</div>
+        
+        <table class="education-table">
+            <thead>
+                <tr>
+                    <th>Grado/Título</th>
+                    <th>Institución</th>
+                    <th>Año</th>
+                    <th>Especialización</th>
+                    <th>GPA/Honores</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maestría en Ingeniería de Audio</td>
+                    <td>Berklee College of Music</td>
+                    <td>2015</td>
+                    <td>Music Production & Engineering</td>
+                    <td>3.8/4.0 - Magna Cum Laude</td>
+                </tr>
+                <tr>
+                    <td>Bachillerato en Música</td>
+                    <td>Universidad de Puerto Rico - Río Piedras</td>
+                    <td>2012</td>
+                    <td>Composición Musical</td>
+                    <td>3.6/4.0</td>
+                </tr>
+                <tr>
+                    <td>Diploma de Escuela Superior</td>
+                    <td>Escuela Superior Central</td>
+                    <td>2008</td>
+                    <td>Concentración en Ciencias</td>
+                    <td>3.9/4.0 - Cuadro de Honor</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">III. CERTIFICACIONES PROFESIONALES</div>
+        
+        <div class="certification-box">
+            <div class="certification-title">Avid Certified Pro Tools Expert</div>
+            <strong>Emisor:</strong> Avid Technology<br>
+            <strong>Fecha de Certificación:</strong> Junio 2018<br>
+            <strong>Fecha de Expiración:</strong> Junio 2026<br>
+            <strong>Número de Certificación:</strong> AVID-PTE-2018-4567
+        </div>
+
+        <div class="certification-box">
+            <div class="certification-title">Audio Engineering Society (AES) Member</div>
+            <strong>Emisor:</strong> Audio Engineering Society<br>
+            <strong>Fecha de Membresía:</strong> Enero 2016<br>
+            <strong>Estatus:</strong> Miembro Activo<br>
+            <strong>Número de Membresía:</strong> AES-16-8901
+        </div>
+
+        <div class="certification-box">
+            <div class="certification-title">Certificación en Acústica Arquitectónica</div>
+            <strong>Emisor:</strong> Institute of Noise Control Engineering<br>
+            <strong>Fecha de Certificación:</strong> Marzo 2020<br>
+            <strong>Validez:</strong> Permanente<br>
+            <strong>Número de Certificación:</strong> INCE-AC-2020-1234
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">IV. EXPERIENCIA PROFESIONAL</div>
+        
+        <div class="experience-item">
+            <div class="experience-title">Instructor Principal - Ingeniería de Audio</div>
+            <div class="experience-company">Liceo de Arte y Tecnología de Puerto Rico</div>
+            <div class="experience-dates">Agosto 2019 - Presente</div>
+            <ul>
+                <li>Enseñanza de cursos de grabación multipista, mezcla y masterización</li>
+                <li>Supervisión de laboratorios de audio digital y estudios de grabación</li>
+                <li>Desarrollo de currículo actualizado según estándares de la industria</li>
+                <li>Coordinación de prácticas profesionales con estudios locales</li>
+                <li>Mentoría de estudiantes en proyectos de graduación</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-title">Ingeniero de Audio Senior</div>
+            <div class="experience-company">Criteria Studios Miami</div>
+            <div class="experience-dates">Enero 2016 - Julio 2019</div>
+            <ul>
+                <li>Grabación y mezcla de álbumes para artistas internacionales</li>
+                <li>Operación de consolas SSL 4000 y 9000 series</li>
+                <li>Mantenimiento y calibración de equipos de estudio</li>
+                <li>Entrenamiento de asistentes de ingeniería</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-title">Ingeniero de Audio Freelance</div>
+            <div class="experience-company">Varios Estudios - Puerto Rico</div>
+            <div class="experience-dates">Junio 2012 - Diciembre 2015</div>
+            <ul>
+                <li>Grabación de música tropical, pop y urbana</li>
+                <li>Servicios de mezcla y masterización</li>
+                <li>Instalación de sistemas de sonido para eventos</li>
+                <li>Consultoría en diseño de estudios caseros</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">V. EVALUACIÓN DE DESEMPEÑO (2024)</div>
+        
+        <div class="evaluation-summary">
+            <h4 style="color: #4CAF50; margin-top: 0;">Resumen de Evaluación Anual</h4>
+            <p><strong>Evaluador:</strong> René E. Rey Meléndez, Director Académico<br>
+            <strong>Fecha de Evaluación:</strong> 15 de diciembre, 2024<br>
+            <strong>Período Evaluado:</strong> Enero - Diciembre 2024</p>
+        </div>
+
+        <div class="rating-grid">
+            <div class="rating-item">
+                <div class="rating-score">4.8</div>
+                <div class="rating-label">Efectividad Instructiva</div>
+            </div>
+            <div class="rating-item">
+                <div class="rating-score">4.9</div>
+                <div class="rating-label">Conocimiento del Contenido</div>
+            </div>
+            <div class="rating-item">
+                <div class="rating-score">4.7</div>
+                <div class="rating-label">Relaciones Estudiantiles</div>
+            </div>
+            <div class="rating-item">
+                <div class="rating-score">4.6</div>
+                <div class="rating-label">Desarrollo Profesional</div>
+            </div>
+        </div>
+
+        <p><strong>Comentarios del Evaluador:</strong> El Prof. Martínez continúa demostrando excelencia en la enseñanza de ingeniería de audio. Sus estudiantes consistentemente logran altas tasas de colocación laboral y expresan alta satisfacción con la calidad de instrucción. Su experiencia profesional en la industria enriquece significativamente el programa académico.</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">VI. DESARROLLO PROFESIONAL CONTINUO</div>
+        
+        <ul>
+            <li><strong>2024:</strong> Conferencia AES 157th Convention - Nueva York (Octubre)</li>
+            <li><strong>2024:</strong> Taller "Dolby Atmos for Music" - Los Angeles (Agosto)</li>
+            <li><strong>2023:</strong> Certificación en Logic Pro X Advanced - Apple (Noviembre)</li>
+            <li><strong>2023:</strong> NAMM Show 2023 - Anaheim, California (Enero)</li>
+            <li><strong>2022:</strong> Curso "Mixing in the Box" - Berklee Online (Septiembre)</li>
+        </ul>
+    </div>
+
+    <div class="footer-info">
+        <p><strong>Liceo de Arte y Tecnología de Puerto Rico</strong><br>
+        Departamento de Recursos Humanos<br>
+        Este expediente contiene información confidencial protegida por ley</p>
+        
+        <p style="margin-top: 15px; font-style: italic;">
+        Expediente actualizado: Enero 2025 | Próxima revisión: Enero 2026<br>
+        Preparado para proceso de reacreditación ACCSC 2025-2026
+        </p>
+    </div>
+</body>
+</html>
+

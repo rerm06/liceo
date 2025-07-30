@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Reacreditación ACCSC 2025 - Liceo de Arte y Tecnología</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(76, 175, 80, 0.05) 0%, transparent 50%);
+            animation: floatingOrbs 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes floatingOrbs {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        /* Header with glassmorphism */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+            filter: brightness(1.2);
+        }
+
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-menu a:hover::before {
+            left: 100%;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(76, 175, 80, 0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section with advanced animations */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 2rem;
+            background: transparent;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50px;
+            color: #4CAF50;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-gradient-text {
+            background: linear-gradient(135deg, #4CAF50, #FF6B35, #4CAF50);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 3s ease infinite;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.8s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(76, 175, 80, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 0.5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-10vh) rotate(180deg);
+            }
+        }
+
+        /* Sections with glassmorphism */
+        .section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #4CAF50, #FF6B35);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* 3D Card Effect */
+        .card-container {
+            perspective: 1000px;
+            margin: 1rem;
+        }
+
+        .card-3d {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(255, 107, 53, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .card-3d:hover::before {
+            opacity: 1;
+        }
+
+        .card-3d:hover {
+            transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-3d:hover .card-icon {
+            transform: translateZ(30px) scale(1.1);
+            color: #FF6B35;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-3d:hover .card-title {
+            transform: translateZ(20px);
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .card-3d:hover .card-description {
+            transform: translateZ(10px);
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Document cards with enhanced effects */
+        .document-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .document-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .document-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .document-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .document-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .document-meta {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+        }
+
+        .document-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Timeline with enhanced animations */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #4CAF50, #FF6B35, #4CAF50);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            max-width: 45%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        /* Module cards with special effects */
+        .module-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .module-card:hover::before {
+            left: 100%;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #4CAF50, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .module-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .module-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .module-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .module-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .module-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 3rem;
+            }
+            
+            .timeline-content {
+                max-width: 100%;
+            }
+            
+            .timeline-date {
+                left: 20px;
+                transform: none;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(76, 175, 80, 0.3);
+            border-top: 3px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Biblioteca de Recursos Styles */
+        .resource-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-title i {
+            color: #4CAF50;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .resource-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(76, 175, 80, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .resource-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .resource-card:hover .resource-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .resource-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .resource-meta {
+            margin-bottom: 1rem;
+        }
+
+        .resource-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .resource-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .resource-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .audio-player {
+            margin: 1rem 0;
+        }
+
+        .audio-player audio {
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .multiple-downloads {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .multiple-downloads a {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: #FF6B35;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .multiple-downloads a:hover {
+            background: rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments for resources */
+        @media (max-width: 768px) {
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .resource-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="liceo_logo_oficial.webp" alt="Liceo de Arte y Tecnología" class="logo">
+            <div class="header-title">Proceso de Reacreditación ACCSC 2025</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#estandares">Estándares</a></li>
+                    <li><a href="#documentos">Documentos</a></li>
+                    <li><a href="#cronograma">Cronograma</a></li>
+                    <li><a href="dashboard.html">Dashboard KPIs</a></li>
+                    <li><a href="gestion-documental.html">Gestión Documental</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-award"></i> ACCSC School of Distinction 2022-2023
+            </div>
+            <h1>
+                Proceso de <span class="hero-gradient-text">Reacreditación</span><br>
+                ACCSC 2025
+            </h1>
+            <p>
+                Liceo de Arte y Tecnología de Puerto Rico<br>
+                Comprometidos con la Excelencia Educativa desde 1964
+            </p>
+            <a href="#documentos" class="hero-cta">
+                <i class="fas fa-folder-open"></i>
+                Explorar Documentación
+            </a>
+        </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="section fade-in-up">
+        <div class="section-container">
+            <div class="card-3d">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2 class="card-title">Bienvenidos al Portal de Reacreditación ACCSC</h2>
+                <p class="card-description">
+                    Como institución educativa comprometida con la excelencia, el Liceo de Arte y Tecnología de Puerto Rico presenta su documentación completa para el proceso de renovación de acreditación ante la Accrediting Commission of Career Schools and Colleges (ACCSC) para el período 2025-2026.
+                </p>
+                <p class="card-description">
+                    Este portal contiene toda la documentación preparada bajo la dirección del <strong>René E. Rey Meléndez, Director Académico</strong>. Aquí encontrará el Plan de Trabajo Estratégico, el Informe de Autoevaluación (SER) y el Índice completo de la Carpeta de Evidencias.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Standards Section -->
+    <section id="estandares" class="section fade-in-up">
+        <div class="section-container">
+            <h2 class="section-title">Estándares ACCSC Evaluados</h2>
+            <p class="section-subtitle">
+                Nuestro proceso de autoevaluación abarca todos los estándares establecidos por ACCSC, 
+                demostrando nuestro cumplimiento excepcional y compromiso con la calidad educativa.
+            </p>
+            
+            <div class="grid-3">
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="card-title">Estándar I: Misión y Objetivos Educacionales</h3>
+                        <p class="card-description">
+                            Misión claramente definida y objetivos educacionales específicos apropiados para los programas ofrecidos.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="card-title">Estándar II: Programas Educacionales</h3>
+                        <p class="card-description">
+                            10 programas académicos de calidad en Arte, Belleza y Tecnología, claramente descritos y de duración apropiada.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="card-title">Estándar III: Facultad y Personal</h3>
+                        <p class="card-description">
+                            Personal docente y administrativo altamente calificado en número suficiente para proporcionar educación de calidad.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3 class="card-title">Estándar IV: Servicios Estudiantiles</h3>
+                        <p class="card-description">
+                            Servicios comprehensivos de apoyo estudiantil que facilitan el logro de objetivos educacionales.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3 class="card-title">Estándar V: Admisiones</h3>
+                        <p class="card-description">
+                            Políticas de admisión claramente definidas, apropiadas y aplicadas de manera consistente y equitativa.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="card-title">Estándar VI: Efectividad Estudiantil</h3>
+                        <p class="card-description">
+                            Demostración del logro de objetivos educacionales y cumplimiento de la misión institucional.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section id="documentos" class="section fade-in-up">
+        <div class="section-container">
+            <h2 class="section-title">Documentación Principal</h2>
+            <p class="section-subtitle">
+                Acceda a los documentos principales preparados para el proceso de reacreditación ACCSC 2025.
+            </p>
+            
+            <div class="grid-2">
+                <div class="document-card">
+                    <div class="document-title">
+                        <i class="fas fa-calendar-alt"></i>
+                        Plan de Trabajo Estratégico
+                    </div>
+                    <div class="document-meta">
+                        <i class="fas fa-user"></i> René E. Rey Meléndez | 
+                        <i class="fas fa-calendar"></i> Julio 2025 | 
+                        <i class="fas fa-file-pdf"></i> 30 páginas
+                    </div>
+                    <div class="document-description">
+                        Cronograma detallado de 6 meses que guía el proceso de reacreditación, incluyendo metodología de trabajo, estructura organizacional, gestión de riesgos y recursos asignados.
+                    </div>
+                    <div class="document-actions">
+                        <a href="#" class="btn btn-primary" onclick="viewDocument('plan')">
+                            <i class="fas fa-eye"></i> Ver Documento
+                        </a>
+                        <a href="Plan_Trabajo_Estrategico_ACCSC_2025.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Descargar PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        Informe de Autoevaluación (SER)
+                    </div>
+                    <div class="document-meta">
+                        <i class="fas fa-user"></i> René E. Rey Meléndez | 
+                        <i class="fas fa-calendar"></i> Octubre 2025 | 
+                        <i class="fas fa-file-pdf"></i> 45 páginas
+                    </div>
+                    <div class="document-description">
+                        Análisis comprehensivo de cumplimiento con todos los estándares ACCSC, incluyendo narrativas detalladas, evidencias de soporte y datos institucionales del período 2022-2025.
+                    </div>
+                    <div class="document-actions">
+                        <a href="#" class="btn btn-primary" onclick="viewDocument('ser')">
+                            <i class="fas fa-eye"></i> Ver Documento
+                        </a>
+                        <a href="Informe_SER_Liceo_ACCSC_2025.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">
+                        <i class="fas fa-folder-open"></i>
+                        Índice de Carpeta de Evidencias
+                    </div>
+                    <div class="document-meta">
+                        <i class="fas fa-user"></i> Prof. María E. Santos | 
+                        <i class="fas fa-calendar"></i> Octubre 2025 | 
+                        <i class="fas fa-file-pdf"></i> 25 páginas
+                    </div>
+                    <div class="document-description">
+                        Catálogo completo de 51 exhibits organizados por estándares ACCSC, totalizando 1,502 páginas de documentación que respaldan el proceso de reacreditación.
+                    </div>
+                    <div class="document-actions">
+                        <a href="#" class="btn btn-primary" onclick="viewDocument('indice')">
+                            <i class="fas fa-eye"></i> Ver Documento
+                        </a>
+                        <a href="Indice_Carpeta_Evidencias_ACCSC_2025.pdf" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+
+                <div class="document-card">
+                    <div class="document-title">
+                        <i class="fas fa-search"></i>
+                        Investigación Institucional
+                    </div>
+                    <div class="document-meta">
+                        <i class="fas fa-users"></i> Equipo de Reacreditación | 
+                        <i class="fas fa-calendar"></i> Julio 2025 | 
+                        <i class="fas fa-file-pdf"></i> 15 páginas
+                    </div>
+                    <div class="document-description">
+                        Compilación de la investigación realizada sobre la institución, incluyendo datos del sitio web oficial, programas académicos y estructura organizacional.
+                    </div>
+                    <div class="document-actions">
+                        <a href="#" class="btn btn-primary" onclick="viewDocument('investigacion')">
+                            <i class="fas fa-eye"></i> Ver Documento
+                        </a>
+                        <a href="investigacion_liceo.md" class="btn btn-secondary" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="cronograma" class="section fade-in-up">
+        <div class="section-container">
+            <h2 class="section-title">Cronograma del Proceso</h2>
+            <p class="section-subtitle">
+                Línea de tiempo del proceso de reacreditación ACCSC 2025-2026
+            </p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Fase I: Organización y Planificación</h3>
+                        <p>Formación del Comité de Reacreditación, designación de coordinadores y capacitación en estándares ACCSC 2025.</p>
+                        <ul>
+                            <li>Formación del Comité de Reacreditación</li>
+                            <li>Designación de Coordinadores por División</li>
+                            <li>Capacitación en Estándares ACCSC</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">Julio 2025</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Fase II: Recopilación de Evidencias</h3>
+                        <p>Auditoría de documentos institucionales, recopilación de datos de retención, graduación y colocación laboral.</p>
+                        <ul>
+                            <li>Auditoría de Documentos Institucionales</li>
+                            <li>Recopilación de Datos de Retención</li>
+                            <li>Análisis de Tasas de Graduación</li>
+                            <li>Encuestas de Satisfacción</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">Agosto 2025</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Fase III: Análisis y Evaluación</h3>
+                        <p>Evaluación de cumplimiento por estándar, identificación de áreas de mejora y desarrollo de planes de acción.</p>
+                        <ul>
+                            <li>Evaluación de Cumplimiento por Estándar</li>
+                            <li>Identificación de Áreas de Mejora</li>
+                            <li>Desarrollo de Planes de Acción</li>
+                            <li>Validación de Datos</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">Septiembre 2025</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Fase IV: Preparación del SER</h3>
+                        <p>Redacción de narrativas por estándar, compilación de carpeta de evidencias y revisión del SER.</p>
+                        <ul>
+                            <li>Redacción de Narrativas por Estándar</li>
+                            <li>Compilación de Carpeta de Evidencias</li>
+                            <li>Revisión y Edición del SER</li>
+                            <li>Validación Externa</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">Octubre 2025</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Fase V: Preparación para Visita</h3>
+                        <p>Simulacro de visita de evaluación, capacitación de personal y preparación de facilidades.</p>
+                        <ul>
+                            <li>Simulacro de Visita de Evaluación</li>
+                            <li>Capacitación de Personal</li>
+                            <li>Preparación de Facilidades</li>
+                            <li>Finalización de Documentación</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">Noviembre 2025</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Fase VI: Envío y Seguimiento</h3>
+                        <p>Envío oficial del SER a ACCSC y preparación final para la visita de evaluación.</p>
+                        <ul>
+                            <li>Envío Oficial del SER a ACCSC</li>
+                            <li>Confirmación de Recepción</li>
+                            <li>Preparación Final para Visita</li>
+                            <li>Coordinación Logística</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">Diciembre 2025</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Fase VII: Visita de Evaluación</h3>
+                        <p>Recepción del equipo evaluador ACCSC, presentaciones, entrevistas y sesión de cierre.</p>
+                        <ul>
+                            <li>Recepción del Equipo Evaluador</li>
+                            <li>Presentaciones y Entrevistas</li>
+                            <li>Recorridos y Demostraciones</li>
+                            <li>Sesión de Cierre</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">Enero 2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Modules Section -->
+    <section class="section fade-in-up">
+        <div class="section-container">
+            <h2 class="section-title">Módulos Digitales Avanzados</h2>
+            <p class="section-subtitle">
+                Herramientas digitales desarrolladas para optimizar el proceso de reacreditación y gestión institucional.
+            </p>
+            
+            <div class="grid-2">
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon">
+                            <i class="fas fa-chart-dashboard"></i>
+                        </div>
+                        <h3 class="module-title">Dashboard KPIs en Tiempo Real</h3>
+                    </div>
+                    <p class="module-description">
+                        Monitoreo en tiempo real de indicadores clave de rendimiento (KPIs) exigidos por los estándares ACCSC. 
+                        Visualización interactiva de tasas de retención, graduación, colocación laboral y cumplimiento por estándares.
+                    </p>
+                    <div class="module-features">
+                        <span>✓ Métricas en tiempo real</span>
+                        <span>✓ Gráficos interactivos</span>
+                        <span>✓ Alertas automáticas</span>
+                    </div>
+                    <a href="dashboard.html" class="module-cta">
+                        <i class="fas fa-external-link-alt"></i> Acceder al Dashboard
+                    </a>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="module-title">Gestión Documental con IA</h3>
+                    </div>
+                    <p class="module-description">
+                        Sistema inteligente de gestión documental con tecnología OCR y RAG (Retrieval-Augmented Generation). 
+                        Permite subir, procesar y consultar documentos mediante chat inteligente para búsqueda instantánea de información.
+                    </p>
+                    <div class="module-features">
+                        <span>✓ Procesamiento OCR</span>
+                        <span>✓ Chat inteligente</span>
+                        <span>✓ Búsqueda semántica</span>
+                    </div>
+                    <a href="gestion-documental.html" class="module-cta">
+                        <i class="fas fa-robot"></i> Acceder al Sistema
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recognition Section -->
+    <section class="section fade-in-up">
+        <div class="section-container">
+            <h2 class="section-title">Reconocimientos y Logros</h2>
+            
+            <div class="grid-3">
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="card-title">ACCSC School of Distinction</h3>
+                        <p class="card-description">
+                            Reconocimiento otorgado en 2022-2023 por cumplimiento excepcional con estándares de calidad educativa.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="card-title">60 Años de Excelencia</h3>
+                        <p class="card-description">
+                            Fundada en 1964, con una trayectoria sólida en educación técnico-vocacional en Puerto Rico.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-container">
+                    <div class="card-3d">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="card-title">495 Estudiantes Activos</h3>
+                        <p class="card-description">
+                            Matrícula actual distribuida en 10 programas académicos especializados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section fade-in-up">
+        <div class="section-container">
+            <div class="card-3d">
+                <div class="card-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h2 class="card-title">Contacto del Equipo de Reacreditación</h2>
+                <div class="grid-2" style="margin-top: 2rem;">
+                    <div>
+                        <h4 style="color: #4CAF50; margin-bottom: 1rem;">Director Académico</h4>
+                        <p style="color: rgba(255,255,255,0.9);"><strong>René E. Rey Meléndez</strong></p>
+                        <p style="color: rgba(255,255,255,0.7);">Coordinador General del Proceso</p>
+                        <p style="color: rgba(255,255,255,0.7);">Email: director.academico@liceo.edu</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #4CAF50; margin-bottom: 1rem;">Información Institucional</h4>
+                        <p style="color: rgba(255,255,255,0.7);">Av. Juan Ponce de León 405</p>
+                        <p style="color: rgba(255,255,255,0.7);">San Juan, Puerto Rico 00918</p>
+                        <p style="color: rgba(255,255,255,0.7);">Tel: (787) 999-2473</p>
+                        <p style="color: rgba(255,255,255,0.7);">Web: www.liceo.edu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biblioteca de Recursos y Referencias -->
+    <section class="section fade-in-up" id="biblioteca">
+        <div class="section-container">
+            <h2 class="section-title">Biblioteca de Recursos y Referencias</h2>
+            <p class="section-description">
+                Acceso completo a documentos institucionales, recursos de referencia y enlaces a fuentes externas 
+                utilizadas en el proceso de reacreditación ACCSC 2025-2026.
+            </p>
+            
+            <!-- Documentos Institucionales -->
+            <div class="resource-category">
+                <h3 class="category-title">
+                    <i class="fas fa-university"></i>
+                    Documentos Institucionales del Liceo
+                </h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4 class="resource-title">Catálogo Institucional</h4>
+                        <p class="resource-description">Catálogo oficial con información completa de programas, políticas y procedimientos.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 3.2 MB</span>
+                        </div>
+                        <a href="CATALOGOLICEODATAINFO.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4 class="resource-title">Plantilla Currículum Programas</h4>
+                        <p class="resource-description">Plantilla oficial para el desarrollo de currículos de programas académicos.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 289 KB</span>
+                        </div>
+                        <a href="LICEOPLANTILLACURRICULOPROGRAMAS.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4 class="resource-title">Información Asistencia Económica</h4>
+                        <p class="resource-description">Guía completa de programas de asistencia económica disponibles para estudiantes.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 478 KB</span>
+                        </div>
+                        <a href="Informacion-de-Asistencia-Economica.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h4 class="resource-title">Matrícula y Costos</h4>
+                        <p class="resource-description">Información detallada sobre costos de matrícula, cuotas y gastos adicionales.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 72 KB</span>
+                        </div>
+                        <a href="Tuition-and-Fees.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="resource-title">Informe Anual de Seguridad</h4>
+                        <p class="resource-description">Reporte anual de seguridad del campus según requerimientos federales.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 935 KB</span>
+                        </div>
+                        <a href="informe-anual-de-seguridad.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4 class="resource-title">Manual del Estudiante</h4>
+                        <p class="resource-description">Manual comprehensivo con políticas, procedimientos y derechos estudiantiles.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 1.4 MB</span>
+                        </div>
+                        <a href="manual-estudiante-consumidor.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4 class="resource-title">Manual Estudiante Extranjero</h4>
+                        <p class="resource-description">Guía especializada para estudiantes internacionales y requisitos de visa.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 218 KB</span>
+                        </div>
+                        <a href="manual-estudiante-extranjero.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <h4 class="resource-title">Adendum al Catálogo</h4>
+                        <p class="resource-description">Actualizaciones y modificaciones recientes al catálogo institucional.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> PDF • 137 KB</span>
+                        </div>
+                        <a href="Adendum-Catalogo.pdf" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recursos Multimedia -->
+            <div class="resource-category">
+                <h3 class="category-title">
+                    <i class="fas fa-play-circle"></i>
+                    Recursos Multimedia
+                </h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h4 class="resource-title">Podcast ACCSC: Preparación de Graduados</h4>
+                        <p class="resource-description">Audio sobre la preparación laboral de graduados y el sello de aprobación ACCSC.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-audio"></i> WAV • 15.2 MB</span>
+                        </div>
+                        <div class="audio-player">
+                            <audio controls style="width: 100%; margin: 10px 0;">
+                                <source src="AreTradeSchoolGradsJob-Ready_UnpackingtheACCSC's_SealofApproval_.wav" type="audio/wav">
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+                        </div>
+                        <a href="AreTradeSchoolGradsJob-Ready_UnpackingtheACCSC's_SealofApproval_.wav" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Referencias Externas -->
+            <div class="resource-category">
+                <h3 class="category-title">
+                    <i class="fas fa-external-link-alt"></i>
+                    Referencias Externas y Fuentes
+                </h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4 class="resource-title">NotebookLM: Investigación Institucional</h4>
+                        <p class="resource-description">Notebook con investigación detallada sobre el proceso de reacreditación y datos institucionales.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-link"></i> Google NotebookLM</span>
+                        </div>
+                        <a href="https://notebooklm.google.com/notebook/e25e5dd0-7de0-428d-b484-e136fdf91416?authuser=3" class="resource-download" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Acceder
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="resource-title">NotebookLM: Análisis de Datos</h4>
+                        <p class="resource-description">Notebook con análisis de datos de efectividad estudiantil y métricas institucionales.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-link"></i> Google NotebookLM</span>
+                        </div>
+                        <a href="https://notebooklm.google.com/notebook/277f7258-2f7c-40eb-8fed-a453abe9c96f" class="resource-download" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Acceder
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h4 class="resource-title">Sitio Web Oficial del Liceo</h4>
+                        <p class="resource-description">Portal oficial con información actualizada sobre programas, admisiones y servicios.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-link"></i> www.liceo.edu</span>
+                        </div>
+                        <a href="https://www.liceo.edu/" class="resource-download" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Visitar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4 class="resource-title">ACCSC - Formularios y Reportes</h4>
+                        <p class="resource-description">Portal oficial de ACCSC con formularios y documentos para el proceso de acreditación.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-link"></i> accsc.org</span>
+                        </div>
+                        <a href="https://www.accsc.org/forms-and-reports/" class="resource-download" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Acceder
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documentos de Trabajo -->
+            <div class="resource-category">
+                <h3 class="category-title">
+                    <i class="fas fa-file-alt"></i>
+                    Documentos de Trabajo y Notas
+                </h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-sticky-note"></i>
+                        </div>
+                        <h4 class="resource-title">Notas de Planificación</h4>
+                        <p class="resource-description">Documentos de trabajo con notas y planificación del proceso de reacreditación.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-text"></i> TXT • 8.6 KB</span>
+                        </div>
+                        <a href="pasted_content.txt" class="resource-download" download>
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h4 class="resource-title">Documentos de Referencia</h4>
+                        <p class="resource-description">Archivos de referencia adicionales utilizados en la preparación de documentos.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-text"></i> TXT • Múltiples archivos</span>
+                        </div>
+                        <div class="multiple-downloads">
+                            <a href="pasted_content_2.txt" download>Ref. 2</a>
+                            <a href="pasted_content_3.txt" download>Ref. 3</a>
+                            <a href="pasted_content_4.txt" download>Ref. 4</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>Liceo de Arte y Tecnología de Puerto Rico</strong></p>
+        <p>Comprometidos con la Excelencia Educativa desde 1964</p>
+        <p>ACCSC School of Distinction 2022-2023</p>
+    </footer>
+
+    <!-- Modal for document viewing -->
+    <div id="documentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; padding: 2rem;">
+        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 20px; padding: 2rem; max-width: 800px; margin: 0 auto; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h3 id="modalTitle" style="color: white; margin: 0;"></h3>
+                <button onclick="closeModal()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modalContent" style="color: rgba(255,255,255,0.9); line-height: 1.6;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Scroll animations
+        function observeElements() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Document modal functions
+        function viewDocument(type) {
+            const modal = document.getElementById('documentModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const documents = {
+                plan: {
+                    title: 'Plan de Trabajo Estratégico',
+                    content: `
+                        <h4>Resumen del Documento</h4>
+                        <p>Este documento presenta el cronograma detallado de 6 meses para el proceso de reacreditación ACCSC 2025-2026, incluyendo:</p>
+                        <ul>
+                            <li>Metodología de trabajo estructurada</li>
+                            <li>Estructura organizacional del proceso</li>
+                            <li>Gestión de riesgos y contingencias</li>
+                            <li>Recursos asignados por fase</li>
+                            <li>Indicadores de éxito y seguimiento</li>
+                        </ul>
+                        <p><strong>Preparado por:</strong> René E. Rey Meléndez, Director Académico</p>
+                        <p><strong>Fecha:</strong> Julio 2025</p>
+                        <p><strong>Páginas:</strong> 30</p>
+                    `
+                },
+                ser: {
+                    title: 'Informe de Autoevaluación (SER)',
+                    content: `
+                        <h4>Resumen del Documento</h4>
+                        <p>Análisis comprehensivo de cumplimiento con todos los estándares ACCSC, que incluye:</p>
+                        <ul>
+                            <li>Narrativas detalladas por cada estándar</li>
+                            <li>Evidencias de soporte documentadas</li>
+                            <li>Datos institucionales del período 2022-2025</li>
+                            <li>Análisis de efectividad estudiantil</li>
+                            <li>Planes de mejora continua</li>
+                        </ul>
+                        <p><strong>Preparado por:</strong> René E. Rey Meléndez, Director Académico</p>
+                        <p><strong>Fecha:</strong> Octubre 2025</p>
+                        <p><strong>Páginas:</strong> 45</p>
+                    `
+                },
+                indice: {
+                    title: 'Índice de Carpeta de Evidencias',
+                    content: `
+                        <h4>Resumen del Documento</h4>
+                        <p>Catálogo completo y organizado de toda la documentación de soporte:</p>
+                        <ul>
+                            <li>51 exhibits organizados por estándares ACCSC</li>
+                            <li>1,502 páginas de documentación total</li>
+                            <li>Tabla maestra con códigos de referencia</li>
+                            <li>Instrucciones para evaluadores</li>
+                            <li>Contactos especializados por área</li>
+                        </ul>
+                        <p><strong>Preparado por:</strong> Prof. María E. Santos</p>
+                        <p><strong>Fecha:</strong> Octubre 2025</p>
+                        <p><strong>Páginas:</strong> 25</p>
+                    `
+                },
+                investigacion: {
+                    title: 'Investigación Institucional',
+                    content: `
+                        <h4>Resumen del Documento</h4>
+                        <p>Compilación de la investigación realizada sobre la institución:</p>
+                        <ul>
+                            <li>Datos del sitio web oficial (liceo.edu)</li>
+                            <li>Información de 10 programas académicos</li>
+                            <li>Estructura organizacional actual</li>
+                            <li>Reconocimientos y logros institucionales</li>
+                            <li>Datos de matrícula y estadísticas</li>
+                        </ul>
+                        <p><strong>Preparado por:</strong> Equipo de Reacreditación</p>
+                        <p><strong>Fecha:</strong> Julio 2025</p>
+                        <p><strong>Páginas:</strong> 15</p>
+                    `
+                }
+            };
+            
+            if (documents[type]) {
+                title.textContent = documents[type].title;
+                content.innerHTML = documents[type].content;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('documentModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('documentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            observeElements();
+        });
+    </script>
+</body>
+</html>
+

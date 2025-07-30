@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard KPIs - Liceo de Arte y Tecnología</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(76, 175, 80, 0.05) 0%, transparent 50%);
+            animation: floatingOrbs 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes floatingOrbs {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            filter: brightness(1.2);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4CAF50, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(76, 175, 80, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #4CAF50, #FF6B35, #4CAF50);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 3s ease infinite;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .last-update {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 20px;
+            color: #4CAF50;
+            font-size: 0.9rem;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .kpi-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-title {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .kpi-icon {
+            font-size: 1.5rem;
+            color: #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover .kpi-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: #FF6B35;
+        }
+
+        .kpi-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover .kpi-value {
+            transform: translateZ(20px);
+        }
+
+        .kpi-change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .kpi-change.positive {
+            color: #4CAF50;
+        }
+
+        .kpi-change.negative {
+            color: #f44336;
+        }
+
+        .kpi-progress {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .kpi-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #2E7D32);
+            border-radius: 3px;
+            transition: width 1s ease;
+            position: relative;
+        }
+
+        .kpi-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s ease infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Charts Section */
+        .charts-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #4CAF50, #FF6B35);
+            border-radius: 2px;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .chart-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        /* Standards Compliance */
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .standard-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .standard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .standard-card:hover::before {
+            left: 100%;
+        }
+
+        .standard-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .standard-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .standard-title {
+            font-size: 1rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .compliance-meter {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .compliance-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#4CAF50 0deg, #4CAF50 var(--percentage), rgba(255,255,255,0.1) var(--percentage));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .compliance-circle::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #0a0a0a;
+            border-radius: 50%;
+        }
+
+        .compliance-percentage {
+            position: absolute;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            z-index: 1;
+        }
+
+        /* Alerts Section */
+        .alerts-section {
+            margin-bottom: 3rem;
+        }
+
+        .alerts-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .alert {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .alert:hover {
+            transform: translateX(10px);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+            color: #FF6B35;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .alert-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .alert-date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(76, 175, 80, 0.3);
+            border-top: 3px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="liceo_logo_oficial.webp" alt="Liceo de Arte y Tecnología" class="logo">
+            <h1 class="header-title">Dashboard KPIs - Reacreditación ACCSC</h1>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Portal Principal
+                </a>
+                <a href="gestion-documental.html" class="nav-link">
+                    <i class="fas fa-brain"></i> Gestión Documental
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Dashboard de KPIs en Tiempo Real</h1>
+            <p>Monitoreo continuo de indicadores clave de rendimiento para el proceso de reacreditación ACCSC 2025</p>
+            <div class="last-update">
+                <i class="fas fa-sync-alt"></i>
+                Última actualización: <span id="lastUpdate"></span>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Tasa de Retención</span>
+                    <i class="fas fa-users kpi-icon"></i>
+                </div>
+                <div class="kpi-value">87.3%</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    +2.1% vs trimestre anterior
+                </div>
+                <div class="kpi-progress">
+                    <div class="kpi-progress-bar" style="width: 87.3%"></div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Tasa de Graduación</span>
+                    <i class="fas fa-graduation-cap kpi-icon"></i>
+                </div>
+                <div class="kpi-value">92.8%</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    +1.5% vs trimestre anterior
+                </div>
+                <div class="kpi-progress">
+                    <div class="kpi-progress-bar" style="width: 92.8%"></div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Colocación Laboral</span>
+                    <i class="fas fa-briefcase kpi-icon"></i>
+                </div>
+                <div class="kpi-value">89.6%</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    +3.2% vs trimestre anterior
+                </div>
+                <div class="kpi-progress">
+                    <div class="kpi-progress-bar" style="width: 89.6%"></div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Satisfacción Estudiantil</span>
+                    <i class="fas fa-star kpi-icon"></i>
+                </div>
+                <div class="kpi-value">94.2%</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    +0.8% vs trimestre anterior
+                </div>
+                <div class="kpi-progress">
+                    <div class="kpi-progress-bar" style="width: 94.2%"></div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Matrícula Activa</span>
+                    <i class="fas fa-user-graduate kpi-icon"></i>
+                </div>
+                <div class="kpi-value">495</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    +12 estudiantes vs mes anterior
+                </div>
+                <div class="kpi-progress">
+                    <div class="kpi-progress-bar" style="width: 82.5%"></div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Cumplimiento ACCSC</span>
+                    <i class="fas fa-check-circle kpi-icon"></i>
+                </div>
+                <div class="kpi-value">97.1%</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    Cumplimiento excepcional
+                </div>
+                <div class="kpi-progress">
+                    <div class="kpi-progress-bar" style="width: 97.1%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <h2 class="section-title">Tendencias Trimestrales</h2>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3 class="chart-title">Retención y Graduación</h3>
+                    <div class="chart-container">
+                        <canvas id="retentionChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3 class="chart-title">Colocación Laboral por Programa</h3>
+                    <div class="chart-container">
+                        <canvas id="placementChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standards Compliance -->
+        <div class="standards-section">
+            <h2 class="section-title">Cumplimiento por Estándares ACCSC</h2>
+            <div class="standards-grid">
+                <div class="standard-card">
+                    <div class="standard-number">I</div>
+                    <div class="standard-title">Misión y Objetivos</div>
+                    <div class="compliance-meter">
+                        <div class="compliance-circle" style="--percentage: 360deg;">
+                            <div class="compliance-percentage">100%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-number">II</div>
+                    <div class="standard-title">Programas Educacionales</div>
+                    <div class="compliance-meter">
+                        <div class="compliance-circle" style="--percentage: 352.8deg;">
+                            <div class="compliance-percentage">98%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-number">III</div>
+                    <div class="standard-title">Facultad y Personal</div>
+                    <div class="compliance-meter">
+                        <div class="compliance-circle" style="--percentage: 342deg;">
+                            <div class="compliance-percentage">95%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-number">IV</div>
+                    <div class="standard-title">Servicios Estudiantiles</div>
+                    <div class="compliance-meter">
+                        <div class="compliance-circle" style="--percentage: 349.2deg;">
+                            <div class="compliance-percentage">97%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-number">V</div>
+                    <div class="standard-title">Admisiones</div>
+                    <div class="compliance-meter">
+                        <div class="compliance-circle" style="--percentage: 360deg;">
+                            <div class="compliance-percentage">100%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-number">VI</div>
+                    <div class="standard-title">Efectividad Estudiantil</div>
+                    <div class="compliance-meter">
+                        <div class="compliance-circle" style="--percentage: 334.8deg;">
+                            <div class="compliance-percentage">93%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Section -->
+        <div class="alerts-section">
+            <h2 class="section-title">Alertas y Fechas Importantes</h2>
+            <div class="alerts-grid">
+                <div class="alert">
+                    <i class="fas fa-calendar-check alert-icon"></i>
+                    <div class="alert-content">
+                        <div class="alert-title">Envío del SER a ACCSC</div>
+                        <div class="alert-description">Fecha límite para envío del Informe de Autoevaluación</div>
+                        <div class="alert-date">15 de Diciembre, 2025</div>
+                    </div>
+                </div>
+
+                <div class="alert">
+                    <i class="fas fa-users alert-icon"></i>
+                    <div class="alert-content">
+                        <div class="alert-title">Visita de Evaluación ACCSC</div>
+                        <div class="alert-description">Recepción del equipo evaluador en el campus</div>
+                        <div class="alert-date">20-22 de Enero, 2026</div>
+                    </div>
+                </div>
+
+                <div class="alert">
+                    <i class="fas fa-chart-line alert-icon"></i>
+                    <div class="alert-content">
+                        <div class="alert-title">Reporte Trimestral de Retención</div>
+                        <div class="alert-description">Actualización de datos de retención estudiantil</div>
+                        <div class="alert-date">30 de Noviembre, 2025</div>
+                    </div>
+                </div>
+
+                <div class="alert">
+                    <i class="fas fa-file-alt alert-icon"></i>
+                    <div class="alert-content">
+                        <div class="alert-title">Finalización de Carpeta de Evidencias</div>
+                        <div class="alert-description">Completar organización de todos los exhibits</div>
+                        <div class="alert-date">1 de Diciembre, 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            const timestamp = now.toLocaleString('es-PR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('lastUpdate').textContent = timestamp;
+        }
+
+        // Initialize charts
+        function initCharts() {
+            // Retention Chart
+            const retentionCtx = document.getElementById('retentionChart').getContext('2d');
+            new Chart(retentionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025'],
+                    datasets: [{
+                        label: 'Retención (%)',
+                        data: [82.1, 84.5, 85.2, 87.3, 87.3],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Graduación (%)',
+                        data: [88.2, 89.1, 91.3, 92.8, 92.8],
+                        borderColor: '#FF6B35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Placement Chart
+            const placementCtx = document.getElementById('placementChart').getContext('2d');
+            new Chart(placementCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Arte Digital', 'Cosmetología', 'Ingeniería Audio', 'Diseño Gráfico', 'Otros'],
+                    datasets: [{
+                        data: [95, 88, 92, 87, 85],
+                        backgroundColor: [
+                            '#4CAF50',
+                            '#FF6B35',
+                            '#2196F3',
+                            '#9C27B0',
+                            '#FFC107'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'white',
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-refresh data
+        function refreshData() {
+            updateTimestamp();
+            // Simulate data updates with small variations
+            const kpiValues = document.querySelectorAll('.kpi-value');
+            kpiValues.forEach(value => {
+                const currentValue = parseFloat(value.textContent);
+                if (!isNaN(currentValue)) {
+                    const variation = (Math.random() - 0.5) * 0.2;
+                    const newValue = Math.max(0, Math.min(100, currentValue + variation));
+                    if (value.textContent.includes('%')) {
+                        value.textContent = newValue.toFixed(1) + '%';
+                    } else {
+                        value.textContent = Math.round(newValue);
+                    }
+                }
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTimestamp();
+            initCharts();
+            
+            // Refresh data every 30 seconds
+            setInterval(refreshData, 30000);
+        });
+    </script>
+</body>
+</html>
+

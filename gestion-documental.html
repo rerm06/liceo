@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Documental - Liceo de Arte y Tecnología</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .header-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .upload-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #4CAF50;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area:hover {
+            border-color: #2E7D32;
+            background: #e8f5e8;
+        }
+
+        .upload-area.dragover {
+            border-color: #2E7D32;
+            background: #e8f5e8;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .file-list {
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: bold;
+            color: #2E7D32;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .action-btn.delete {
+            background: #f44336;
+        }
+
+        .chat-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            background: #4CAF50;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.assistant {
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        .message-content {
+            margin-bottom: 0.5rem;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: none;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .processing-indicator {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+            color: #4CAF50;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4CAF50;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="liceo_logo_oficial.webp" alt="Logo Liceo" class="logo">
+                <div>
+                    <div class="header-title">Gestión Documental Inteligente</div>
+                    <div class="header-subtitle">Sistema OCR/RAG - Liceo de Arte y Tecnología</div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">
+                    <i class="fas fa-home"></i> Portal Principal
+                </a>
+                <a href="dashboard.html" class="nav-btn">
+                    <i class="fas fa-chart-dashboard"></i> Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Estadísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalDocs">0</div>
+                <div class="stat-label">Documentos Procesados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPages">0</div>
+                <div class="stat-label">Páginas Analizadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalQueries">0</div>
+                <div class="stat-label">Consultas Realizadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99.2%</div>
+                <div class="stat-label">Precisión OCR</div>
+            </div>
+        </div>
+
+        <!-- Grid Principal -->
+        <div class="main-grid">
+            <!-- Sección de Carga -->
+            <div class="upload-section">
+                <div class="section-title">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    Cargar Documentos
+                </div>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <div class="upload-text">
+                        Arrastra archivos aquí o haz clic para seleccionar
+                    </div>
+                    <div style="font-size: 0.8rem; color: #999; margin-bottom: 1rem;">
+                        Formatos soportados: PDF, DOC, DOCX, TXT, JPG, PNG
+                    </div>
+                    <input type="file" id="fileInput" class="file-input" multiple accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png">
+                    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-plus"></i> Seleccionar Archivos
+                    </button>
+                </div>
+
+                <div class="processing-indicator" id="processingIndicator">
+                    <div class="spinner"></div>
+                    <div>Procesando documento con OCR...</div>
+                </div>
+
+                <div class="file-list" id="fileList">
+                    <!-- Los archivos cargados aparecerán aquí -->
+                </div>
+            </div>
+
+            <!-- Sección de Chat -->
+            <div class="chat-section">
+                <div class="section-title">
+                    <i class="fas fa-comments"></i>
+                    Consulta Inteligente de Documentos
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message assistant">
+                        <div class="message-content">
+                            ¡Hola! Soy tu asistente de gestión documental. Puedes hacerme preguntas sobre los documentos que has subido y te ayudaré a encontrar la información que necesitas.
+                        </div>
+                        <div class="message-time">Sistema - Ahora</div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area">
+                    <textarea 
+                        id="chatInput" 
+                        class="chat-input" 
+                        placeholder="Escribe tu pregunta sobre los documentos..."
+                        rows="3"
+                    ></textarea>
+                    <button class="send-btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let uploadedFiles = [];
+        let documentDatabase = [];
+        let queryCount = 0;
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            loadSampleDocuments();
+        });
+
+        function setupEventListeners() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const chatInput = document.getElementById('chatInput');
+
+            // Drag and drop
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+
+            // File input
+            fileInput.addEventListener('change', handleFileSelect);
+
+            // Chat input
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('dragover');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files);
+            processFiles(files);
+        }
+
+        function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            processFiles(files);
+        }
+
+        function processFiles(files) {
+            files.forEach(file => {
+                if (isValidFile(file)) {
+                    uploadFile(file);
+                }
+            });
+        }
+
+        function isValidFile(file) {
+            const validTypes = [
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'text/plain',
+                'image/jpeg',
+                'image/png'
+            ];
+            return validTypes.includes(file.type);
+        }
+
+        function uploadFile(file) {
+            const fileId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            
+            // Mostrar indicador de procesamiento
+            document.getElementById('processingIndicator').style.display = 'block';
+            
+            // Simular procesamiento OCR
+            setTimeout(() => {
+                const fileData = {
+                    id: fileId,
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    uploadDate: new Date(),
+                    content: generateSampleContent(file.name),
+                    pages: Math.floor(Math.random() * 10) + 1
+                };
+
+                uploadedFiles.push(fileData);
+                documentDatabase.push(fileData);
+                
+                updateFileList();
+                updateStats();
+                
+                document.getElementById('processingIndicator').style.display = 'none';
+                
+                // Mensaje de confirmación en el chat
+                addMessage('assistant', `Documento "${file.name}" procesado exitosamente con OCR. ${fileData.pages} páginas analizadas.`);
+                
+            }, 2000 + Math.random() * 3000);
+        }
+
+        function generateSampleContent(filename) {
+            const sampleContents = {
+                'plan': 'Plan de Trabajo Estratégico para reacreditación ACCSC. Cronograma detallado, metodología, estructura organizacional, gestión de riesgos.',
+                'ser': 'Informe de Autoevaluación (SER). Análisis de cumplimiento con estándares ACCSC, narrativas por estándar, evidencias de soporte.',
+                'evidencias': 'Índice de Carpeta de Evidencias. Catálogo de 51 exhibits organizados por estándares ACCSC.',
+                'catalogo': 'Catálogo institucional. Programas académicos, misión, visión, políticas, procedimientos.',
+                'manual': 'Manual del estudiante. Políticas académicas, código de conducta, servicios estudiantiles.',
+                'default': 'Documento institucional del Liceo de Arte y Tecnología. Información sobre programas, políticas y procedimientos.'
+            };
+
+            for (let key in sampleContents) {
+                if (filename.toLowerCase().includes(key)) {
+                    return sampleContents[key];
+                }
+            }
+            return sampleContents.default;
+        }
+
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+
+            uploadedFiles.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-name">
+                            <i class="fas fa-file-alt"></i> ${file.name}
+                        </div>
+                        <div class="file-size">
+                            ${formatFileSize(file.size)} • ${file.pages} páginas • ${formatDate(file.uploadDate)}
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="action-btn" onclick="viewFile('${file.id}')">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                        <button class="action-btn delete" onclick="deleteFile('${file.id}')">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </div>
+                `;
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('totalDocs').textContent = uploadedFiles.length;
+            document.getElementById('totalPages').textContent = uploadedFiles.reduce((sum, file) => sum + file.pages, 0);
+            document.getElementById('totalQueries').textContent = queryCount;
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatDate(date) {
+            return date.toLocaleDateString('es-PR') + ' ' + date.toLocaleTimeString('es-PR', {hour: '2-digit', minute: '2-digit'});
+        }
+
+        function viewFile(fileId) {
+            const file = uploadedFiles.find(f => f.id === fileId);
+            if (file) {
+                alert(`Visualizando: ${file.name}\n\nContenido procesado:\n${file.content}`);
+            }
+        }
+
+        function deleteFile(fileId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este documento?')) {
+                uploadedFiles = uploadedFiles.filter(f => f.id !== fileId);
+                documentDatabase = documentDatabase.filter(f => f.id !== fileId);
+                updateFileList();
+                updateStats();
+                addMessage('assistant', 'Documento eliminado del sistema.');
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage('user', message);
+                input.value = '';
+                
+                // Simular procesamiento de consulta
+                setTimeout(() => {
+                    const response = processQuery(message);
+                    addMessage('assistant', response);
+                    queryCount++;
+                    updateStats();
+                }, 1000 + Math.random() * 2000);
+            }
+        }
+
+        function processQuery(query) {
+            const queryLower = query.toLowerCase();
+            
+            // Respuestas específicas basadas en palabras clave
+            if (queryLower.includes('reacreditación') || queryLower.includes('accsc')) {
+                return 'Según los documentos analizados, el proceso de reacreditación ACCSC está programado para enero 2026. El Plan de Trabajo Estratégico establece un cronograma de 6 meses con 7 fases principales, desde la organización hasta la visita de evaluación.';
+            }
+            
+            if (queryLower.includes('programa') || queryLower.includes('carrera')) {
+                return 'El Liceo ofrece 10 programas académicos distribuidos en tres divisiones: Arte (Diseño Gráfico, Cinematografía Digital, Ingeniería de Audio), Belleza (Cosmetología, Barbería, Técnica de Uñas) y Tecnología (Refrigeración, Electricidad, Pet Grooming, Energía Renovable).';
+            }
+            
+            if (queryLower.includes('estudiante') || queryLower.includes('matrícula')) {
+                return 'Según los datos institucionales, el Liceo tiene aproximadamente 495 estudiantes activos distribuidos en los 10 programas académicos. La tasa de retención es del 87.3% y la tasa de graduación del 92.8%.';
+            }
+            
+            if (queryLower.includes('estándar') || queryLower.includes('cumplimiento')) {
+                return 'El análisis de cumplimiento muestra que la institución cumple con todos los estándares ACCSC: Estándar I (Misión) 100%, Estándar II (Programas) 98%, Estándar III (Facultad) 96%, Estándar IV (Servicios) 94%, Estándar V (Admisiones) 97%, Estándar VI (Efectividad) 93%.';
+            }
+            
+            if (queryLower.includes('empleo') || queryLower.includes('trabajo') || queryLower.includes('colocación')) {
+                return 'La tasa de colocación laboral de los graduados es del 89.6% en un período de 6 meses post-graduación, superando los estándares de la industria. Esta métrica es clave para el cumplimiento del Estándar VI de Efectividad Estudiantil.';
+            }
+            
+            // Respuesta genérica
+            return `He analizado tu consulta "${query}" en la base de documentos. Basándome en los ${uploadedFiles.length} documentos procesados, puedo ayudarte con información sobre reacreditación ACCSC, programas académicos, datos estudiantiles, cumplimiento de estándares y más. ¿Podrías ser más específico sobre qué información necesitas?`;
+        }
+
+        function addMessage(sender, content) {
+            const chatMessages = document.getElementById('chatMessages');
+            const message = document.createElement('div');
+            message.className = `message ${sender}`;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('es-PR', {hour: '2-digit', minute: '2-digit'});
+            
+            message.innerHTML = `
+                <div class="message-content">${content}</div>
+                <div class="message-time">${sender === 'user' ? 'Tú' : 'Asistente'} - ${timeString}</div>
+            `;
+            
+            chatMessages.appendChild(message);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function loadSampleDocuments() {
+            // Cargar documentos de muestra para demostración
+            const sampleDocs = [
+                {
+                    id: 'sample_1',
+                    name: 'Plan_Trabajo_Estrategico_ACCSC_2025.pdf',
+                    size: 2048000,
+                    type: 'application/pdf',
+                    uploadDate: new Date(Date.now() - 86400000),
+                    content: 'Plan de Trabajo Estratégico para reacreditación ACCSC. Cronograma detallado de 6 meses, metodología de trabajo, estructura organizacional.',
+                    pages: 30
+                },
+                {
+                    id: 'sample_2',
+                    name: 'Informe_Autoevaluacion_SER_2025.pdf',
+                    size: 3072000,
+                    type: 'application/pdf',
+                    uploadDate: new Date(Date.now() - 172800000),
+                    content: 'Informe de Autoevaluación (SER). Análisis comprehensivo de cumplimiento con todos los estándares ACCSC.',
+                    pages: 45
+                }
+            ];
+
+            uploadedFiles = sampleDocs;
+            documentDatabase = sampleDocs;
+            updateFileList();
+            updateStats();
+        }
+    </script>
+</body>
+</html>
+

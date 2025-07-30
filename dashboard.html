@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard KPIs ACCSC - Liceo de Arte y Tecnología</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .header-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .last-update {
+            text-align: right;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+
+        .kpi-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .kpi-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .trend-up {
+            color: #4CAF50;
+        }
+
+        .trend-down {
+            color: #f44336;
+        }
+
+        .trend-stable {
+            color: #FF9800;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .standard-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #4CAF50;
+        }
+
+        .standard-title {
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 1rem;
+        }
+
+        .compliance-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .compliant {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .partial {
+            background: #FF9800;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #2E7D32);
+            transition: width 0.3s ease;
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .alert-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .alert-title {
+            color: #856404;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-content {
+            color: #856404;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="liceo_logo_oficial.webp" alt="Logo Liceo" class="logo">
+                <div>
+                    <div class="header-title">Dashboard KPIs ACCSC</div>
+                    <div class="header-subtitle">Liceo de Arte y Tecnología de Puerto Rico</div>
+                </div>
+            </div>
+            <div class="last-update">
+                <div>Última actualización:</div>
+                <div id="lastUpdate"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Alertas y Notificaciones -->
+        <div class="alert-section">
+            <div class="alert-title">
+                <i class="fas fa-exclamation-triangle"></i> Próximas Fechas Importantes
+            </div>
+            <div class="alert-content">
+                • Envío del SER a ACCSC: Diciembre 15, 2025<br>
+                • Visita de Evaluación: Enero 20-22, 2026<br>
+                • Reunión de preparación del equipo: Noviembre 30, 2025
+            </div>
+        </div>
+
+        <!-- KPIs Principales -->
+        <div class="dashboard-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-title">Tasa de Retención</div>
+                    <div class="kpi-icon"><i class="fas fa-users"></i></div>
+                </div>
+                <div class="kpi-value" id="retentionRate">87.3%</div>
+                <div class="kpi-description">Estudiantes que continúan sus estudios</div>
+                <div class="kpi-trend trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+2.1% vs período anterior</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-title">Tasa de Graduación</div>
+                    <div class="kpi-icon"><i class="fas fa-graduation-cap"></i></div>
+                </div>
+                <div class="kpi-value" id="graduationRate">92.8%</div>
+                <div class="kpi-description">Estudiantes que completan sus programas</div>
+                <div class="kpi-trend trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+1.5% vs período anterior</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-title">Colocación Laboral</div>
+                    <div class="kpi-icon"><i class="fas fa-briefcase"></i></div>
+                </div>
+                <div class="kpi-value" id="employmentRate">89.6%</div>
+                <div class="kpi-description">Graduados empleados en 6 meses</div>
+                <div class="kpi-trend trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+3.2% vs período anterior</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-title">Satisfacción Estudiantil</div>
+                    <div class="kpi-icon"><i class="fas fa-star"></i></div>
+                </div>
+                <div class="kpi-value" id="satisfactionRate">94.2%</div>
+                <div class="kpi-description">Estudiantes satisfechos con la educación</div>
+                <div class="kpi-trend trend-stable">
+                    <i class="fas fa-minus"></i>
+                    <span>Estable vs período anterior</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-title">Matrícula Activa</div>
+                    <div class="kpi-icon"><i class="fas fa-user-graduate"></i></div>
+                </div>
+                <div class="kpi-value" id="enrollment">495</div>
+                <div class="kpi-description">Estudiantes matriculados actualmente</div>
+                <div class="kpi-trend trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+12 estudiantes vs mes anterior</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <div class="kpi-title">Ratio Estudiante-Facultad</div>
+                    <div class="kpi-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                </div>
+                <div class="kpi-value" id="studentFacultyRatio">12:1</div>
+                <div class="kpi-description">Proporción estudiantes por instructor</div>
+                <div class="kpi-trend trend-stable">
+                    <i class="fas fa-minus"></i>
+                    <span>Dentro del rango óptimo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de Tendencias -->
+        <div class="chart-container">
+            <div class="chart-title">Tendencias de KPIs por Trimestre (2024-2025)</div>
+            <canvas id="trendsChart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Cumplimiento por Estándares ACCSC -->
+        <div class="chart-container">
+            <div class="chart-title">Cumplimiento por Estándares ACCSC</div>
+            <div class="standards-grid">
+                <div class="standard-card">
+                    <div class="standard-title">Estándar I: Misión y Objetivos</div>
+                    <div class="compliance-status compliant">CUMPLE</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #666;">100% - Totalmente conforme</div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-title">Estándar II: Programas Educacionales</div>
+                    <div class="compliance-status compliant">CUMPLE</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 98%"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #666;">98% - Excelente cumplimiento</div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-title">Estándar III: Facultad y Personal</div>
+                    <div class="compliance-status compliant">CUMPLE</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 96%"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #666;">96% - Muy buen cumplimiento</div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-title">Estándar IV: Servicios Estudiantiles</div>
+                    <div class="compliance-status compliant">CUMPLE</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94%"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #666;">94% - Buen cumplimiento</div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-title">Estándar V: Admisiones</div>
+                    <div class="compliance-status compliant">CUMPLE</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 97%"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #666;">97% - Excelente cumplimiento</div>
+                </div>
+
+                <div class="standard-card">
+                    <div class="standard-title">Estándar VI: Efectividad Estudiantil</div>
+                    <div class="compliance-status compliant">CUMPLE</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 93%"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #666;">93% - Buen cumplimiento</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de Distribución por Programas -->
+        <div class="chart-container">
+            <div class="chart-title">Distribución de Matrícula por División</div>
+            <canvas id="enrollmentChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="refreshData()" title="Actualizar datos">
+        <i class="fas fa-sync-alt"></i>
+    </button>
+
+    <script>
+        // Actualizar timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = now.toLocaleString('es-PR');
+        }
+
+        // Simular actualización de datos en tiempo real
+        function refreshData() {
+            const refreshBtn = document.querySelector('.refresh-btn i');
+            refreshBtn.style.animation = 'spin 1s linear';
+            
+            // Simular variaciones pequeñas en los KPIs
+            setTimeout(() => {
+                const retentionRate = (87.3 + (Math.random() - 0.5) * 2).toFixed(1);
+                const graduationRate = (92.8 + (Math.random() - 0.5) * 1.5).toFixed(1);
+                const employmentRate = (89.6 + (Math.random() - 0.5) * 2.5).toFixed(1);
+                const satisfactionRate = (94.2 + (Math.random() - 0.5) * 1).toFixed(1);
+                const enrollment = Math.floor(495 + (Math.random() - 0.5) * 10);
+                
+                document.getElementById('retentionRate').textContent = retentionRate + '%';
+                document.getElementById('graduationRate').textContent = graduationRate + '%';
+                document.getElementById('employmentRate').textContent = employmentRate + '%';
+                document.getElementById('satisfactionRate').textContent = satisfactionRate + '%';
+                document.getElementById('enrollment').textContent = enrollment;
+                
+                updateTimestamp();
+                refreshBtn.style.animation = '';
+            }, 1000);
+        }
+
+        // Configurar gráfico de tendencias
+        const trendsCtx = document.getElementById('trendsChart').getContext('2d');
+        const trendsChart = new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025'],
+                datasets: [
+                    {
+                        label: 'Retención (%)',
+                        data: [85.2, 86.1, 86.8, 87.0, 87.3],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Graduación (%)',
+                        data: [90.5, 91.2, 91.8, 92.3, 92.8],
+                        borderColor: '#2E7D32',
+                        backgroundColor: 'rgba(46, 125, 50, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Colocación (%)',
+                        data: [86.2, 87.1, 88.3, 88.9, 89.6],
+                        borderColor: '#FF9800',
+                        backgroundColor: 'rgba(255, 152, 0, 0.1)',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 80,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Configurar gráfico de distribución
+        const enrollmentCtx = document.getElementById('enrollmentChart').getContext('2d');
+        const enrollmentChart = new Chart(enrollmentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Arte', 'Belleza', 'Tecnología'],
+                datasets: [{
+                    data: [165, 198, 132],
+                    backgroundColor: [
+                        '#4CAF50',
+                        '#2E7D32',
+                        '#FF9800'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    }
+                }
+            }
+        });
+
+        // Inicializar
+        updateTimestamp();
+        
+        // Auto-refresh cada 5 minutos
+        setInterval(refreshData, 300000);
+
+        // Agregar animación de spin para el botón de refresh
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITULO_DOCUMENTO}} - Liceo de Arte y Tecnología</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm 2cm 3cm 2cm;
+            @top-center {
+                content: "Liceo de Arte y Tecnología de Puerto Rico";
+                font-family: 'Arial', sans-serif;
+                font-size: 10pt;
+                color: #4CAF50;
+                border-bottom: 1px solid #4CAF50;
+                padding-bottom: 5px;
+            }
+            @bottom-center {
+                content: "Página " counter(page) " de " counter(pages);
+                font-family: 'Arial', sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-container {
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+        
+        .institution-name {
+            color: #4CAF50;
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .document-title {
+            color: #2E7D32;
+            font-size: 24pt;
+            font-weight: bold;
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+        
+        .document-subtitle {
+            color: #666;
+            font-size: 14pt;
+            margin-bottom: 20px;
+        }
+        
+        .document-info {
+            background: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .document-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .document-info td {
+            padding: 5px 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .document-info td:first-child {
+            font-weight: bold;
+            color: #2E7D32;
+            width: 30%;
+        }
+        
+        h1 {
+            color: #2E7D32;
+            font-size: 20pt;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: #4CAF50;
+            font-size: 16pt;
+            margin-top: 25px;
+        }
+        
+        h3 {
+            color: #2E7D32;
+            font-size: 14pt;
+            margin-top: 20px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .accsc-standard {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .accsc-standard h4 {
+            color: #2E7D32;
+            margin-top: 0;
+            border-bottom: 1px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .footer-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #4CAF50;
+            text-align: center;
+            color: #666;
+            font-size: 10pt;
+        }
+        
+        .signature-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .signature-line {
+            border-top: 1px solid #333;
+            width: 300px;
+            margin: 40px auto 10px auto;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .evidence-list {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .compliance-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .compliant {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .partial {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .non-compliant {
+            background: #F44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="liceo_logo_oficial.webp" alt="Logo Liceo de Arte y Tecnología" class="logo">
+        </div>
+        <div class="institution-name">LICEO DE ARTE Y TECNOLOGÍA DE PUERTO RICO</div>
+        <div class="document-title">{{TITULO_DOCUMENTO}}</div>
+        <div class="document-subtitle">{{SUBTITULO_DOCUMENTO}}</div>
+    </div>
+    
+    <div class="document-info">
+        <table>
+            <tr>
+                <td>Institución:</td>
+                <td>Liceo de Arte y Tecnología de Puerto Rico</td>
+            </tr>
+            <tr>
+                <td>Dirección:</td>
+                <td>Av. Juan Ponce de León 405, San Juan, Puerto Rico 00918</td>
+            </tr>
+            <tr>
+                <td>Teléfono:</td>
+                <td>(787) 999-2473</td>
+            </tr>
+            <tr>
+                <td>Sitio Web:</td>
+                <td>https://www.liceo.edu/</td>
+            </tr>
+            <tr>
+                <td>Preparado por:</td>
+                <td>{{AUTOR_DOCUMENTO}}</td>
+            </tr>
+            <tr>
+                <td>Fecha:</td>
+                <td>{{FECHA_DOCUMENTO}}</td>
+            </tr>
+            <tr>
+                <td>Proceso:</td>
+                <td>Renovación de Acreditación ACCSC 2025-2026</td>
+            </tr>
+        </table>
+    </div>
+    
+    {{CONTENIDO_DOCUMENTO}}
+    
+    <div class="footer-info">
+        <p><strong>Liceo de Arte y Tecnología de Puerto Rico</strong></p>
+        <p>Comprometidos con la Excelencia Educativa desde 1964</p>
+        <p>ACCSC School of Distinction 2022-2023</p>
+        <p>Av. Juan Ponce de León 405, San Juan, Puerto Rico 00918 | Tel: (787) 999-2473</p>
+        <p>www.liceo.edu</p>
+    </div>
+</body>
+</html>
+

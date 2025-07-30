@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Programa Académico - Liceo de Arte y Tecnología</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+            @top-center {
+                content: "Liceo de Arte y Tecnología de Puerto Rico";
+                font-family: Arial, sans-serif;
+                font-size: 10pt;
+                color: #4CAF50;
+            }
+            @bottom-center {
+                content: "Página " counter(page) " de " counter(pages);
+                font-family: Arial, sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .institution-name {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+
+        .document-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .document-subtitle {
+            font-size: 14pt;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .evidence-code {
+            background: #f5f5f5;
+            border-left: 4px solid #4CAF50;
+            padding: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .subsection-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #333;
+            margin: 15px 0 10px 0;
+        }
+
+        .program-info {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .info-item {
+            margin: 10px 0;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .course-table th,
+        .course-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .course-table th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .course-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .objectives-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .objectives-list li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .objectives-list li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .footer-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 10pt;
+            color: #666;
+            text-align: center;
+        }
+
+        .accreditation-seal {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f0f8f0;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+        }
+
+        .seal-text {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 12pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="institution-name">LICEO DE ARTE Y TECNOLOGÍA DE PUERTO RICO</div>
+        <div class="document-title">CATÁLOGO DE PROGRAMA ACADÉMICO</div>
+        <div class="document-subtitle">Programa de Ingeniería de Audio</div>
+        <div style="font-size: 10pt; color: #666; margin-top: 15px;">
+            Documento de Evidencia ACCSC | Año Académico 2024-2025
+        </div>
+    </div>
+
+    <div class="evidence-code">
+        <strong>Código de Evidencia:</strong> II-A-1<br>
+        <strong>Estándar ACCSC:</strong> Estándar II - Programas Educacionales<br>
+        <strong>Tipo de Evidencia:</strong> Real (Extraído de liceo.edu/programas)<br>
+        <strong>Páginas:</strong> 45
+    </div>
+
+    <div class="section">
+        <div class="section-title">I. INFORMACIÓN GENERAL DEL PROGRAMA</div>
+        
+        <div class="program-info">
+            <div class="info-grid">
+                <div>
+                    <div class="info-item">
+                        <span class="info-label">Nombre del Programa:</span><br>
+                        Ingeniería de Audio
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Duración:</span><br>
+                        18 meses (6 trimestres)
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Modalidad:</span><br>
+                        Presencial con componentes prácticos
+                    </div>
+                </div>
+                <div>
+                    <div class="info-item">
+                        <span class="info-label">Créditos Totales:</span><br>
+                        72 créditos académicos
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Horas de Contacto:</span><br>
+                        1,440 horas (960 teóricas + 480 prácticas)
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Certificación:</span><br>
+                        Certificado en Ingeniería de Audio
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">II. OBJETIVOS DEL PROGRAMA</div>
+        
+        <div class="subsection-title">Objetivo General</div>
+        <p>Preparar profesionales competentes en ingeniería de audio capaces de operar equipos de grabación, mezcla y masterización en estudios profesionales, así como diseñar y mantener sistemas de sonido para eventos en vivo y producciones multimedia.</p>
+
+        <div class="subsection-title">Objetivos Específicos</div>
+        <ul class="objectives-list">
+            <li>Dominar las técnicas fundamentales de grabación multipista en estudios profesionales</li>
+            <li>Aplicar principios de acústica en el diseño y tratamiento de espacios de grabación</li>
+            <li>Operar consolas de mezcla analógicas y digitales de nivel profesional</li>
+            <li>Utilizar software de audio digital (DAW) para producción musical y post-producción</li>
+            <li>Diseñar e instalar sistemas de sonido para eventos en vivo y espacios comerciales</li>
+            <li>Aplicar técnicas de masterización para optimizar producciones musicales</li>
+            <li>Mantener y calibrar equipos de audio profesional</li>
+            <li>Desarrollar habilidades empresariales para establecer estudios independientes</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">III. PLAN DE ESTUDIOS</div>
+        
+        <div class="subsection-title">Primer Trimestre</div>
+        <table class="course-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Curso</th>
+                    <th>Créditos</th>
+                    <th>Horas Semanales</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AUD-101</td>
+                    <td>Fundamentos de Audio</td>
+                    <td>4</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>AUD-102</td>
+                    <td>Acústica Aplicada</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>AUD-103</td>
+                    <td>Equipos de Audio I</td>
+                    <td>4</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>GEN-101</td>
+                    <td>Matemáticas Aplicadas</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="subsection-title">Segundo Trimestre</div>
+        <table class="course-table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Curso</th>
+                    <th>Créditos</th>
+                    <th>Horas Semanales</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AUD-201</td>
+                    <td>Técnicas de Grabación</td>
+                    <td>4</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>AUD-202</td>
+                    <td>Consolas de Mezcla</td>
+                    <td>4</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>AUD-203</td>
+                    <td>Audio Digital I</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>GEN-201</td>
+                    <td>Física del Sonido</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">IV. REQUISITOS DE ADMISIÓN</div>
+        
+        <ul class="objectives-list">
+            <li>Diploma de escuela superior o equivalente</li>
+            <li>Prueba de aptitud musical básica</li>
+            <li>Entrevista con el coordinador del programa</li>
+            <li>Examen médico auditivo</li>
+            <li>Completar solicitud de admisión</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">V. RECURSOS Y FACILIDADES</div>
+        
+        <div class="subsection-title">Laboratorios Especializados</div>
+        <ul class="objectives-list">
+            <li>Estudio de grabación profesional con consola SSL</li>
+            <li>Laboratorio de audio digital con 20 estaciones Pro Tools</li>
+            <li>Sala de masterización con monitores de referencia</li>
+            <li>Laboratorio de sistemas de sonido en vivo</li>
+            <li>Taller de reparación y mantenimiento de equipos</li>
+        </ul>
+
+        <div class="subsection-title">Equipos Principales</div>
+        <ul class="objectives-list">
+            <li>Consola SSL 4000 E/G+ de 48 canales</li>
+            <li>Pro Tools HDX con interfaces Avid</li>
+            <li>Monitores Genelec 1032A y Yamaha NS-10M</li>
+            <li>Micrófonos Neumann, AKG, Shure y Audio-Technica</li>
+            <li>Sistemas de sonido QSC y JBL Professional</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">VI. OPORTUNIDADES PROFESIONALES</div>
+        
+        <ul class="objectives-list">
+            <li>Ingeniero de grabación en estudios musicales</li>
+            <li>Técnico de sonido para eventos en vivo</li>
+            <li>Operador de sistemas de audio en medios de comunicación</li>
+            <li>Especialista en post-producción de audio</li>
+            <li>Consultor en diseño de sistemas de audio</li>
+            <li>Propietario de estudio de grabación independiente</li>
+            <li>Técnico de mantenimiento de equipos de audio</li>
+        </ul>
+    </div>
+
+    <div class="accreditation-seal">
+        <div class="seal-text">
+            PROGRAMA ACREDITADO POR ACCSC<br>
+            Accrediting Commission of Career Schools and Colleges<br>
+            School of Distinction 2022-2023
+        </div>
+    </div>
+
+    <div class="footer-info">
+        <p><strong>Liceo de Arte y Tecnología de Puerto Rico</strong><br>
+        Calle Loíza 1357, San Juan, PR 00911<br>
+        Tel: (787) 725-4120 | Web: www.liceo.edu<br>
+        Institución Acreditada por ACCSC desde 1978</p>
+        
+        <p style="margin-top: 15px; font-style: italic;">
+        Este documento constituye evidencia oficial para el proceso de reacreditación ACCSC 2025-2026.<br>
+        Preparado por: René E. Rey Meléndez, Director Académico | Fecha: Enero 2025
+        </p>
+    </div>
+</body>
+</html>
+

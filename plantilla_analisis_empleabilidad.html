@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Empleabilidad por Programa - Liceo de Arte y Tecnología</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+            @top-center {
+                content: "Liceo de Arte y Tecnología de Puerto Rico";
+                font-family: Arial, sans-serif;
+                font-size: 10pt;
+                color: #4CAF50;
+            }
+            @bottom-center {
+                content: "Página " counter(page) " de " counter(pages);
+                font-family: Arial, sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .institution-name {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+
+        .document-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .document-subtitle {
+            font-size: 14pt;
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .evidence-code {
+            background: #f5f5f5;
+            border-left: 4px solid #FF6B35;
+            padding: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .subsection-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #333;
+            margin: 15px 0 10px 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .data-table th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .highlight-cell {
+            background: #e8f5e8 !important;
+            font-weight: bold;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #f9f9f9;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .summary-box {
+            background: #f0f8f0;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .summary-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .metric-label {
+            font-size: 10pt;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .methodology-box {
+            background: #fff8f0;
+            border: 1px solid #FF6B35;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .footer-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 10pt;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="institution-name">LICEO DE ARTE Y TECNOLOGÍA DE PUERTO RICO</div>
+        <div class="document-title">ANÁLISIS DE EMPLEABILIDAD POR PROGRAMA</div>
+        <div class="document-subtitle">Período de Evaluación: 2022-2024</div>
+        <div style="font-size: 10pt; color: #666; margin-top: 15px;">
+            Reporte de Efectividad Estudiantil | Proceso de Reacreditación ACCSC
+        </div>
+    </div>
+
+    <div class="evidence-code">
+        <strong>Código de Evidencia:</strong> II-B-1<br>
+        <strong>Estándar ACCSC:</strong> Estándar II - Programas Educacionales<br>
+        <strong>Tipo de Evidencia:</strong> Simulada (Basada en tendencias del mercado laboral de PR)<br>
+        <strong>Páginas:</strong> 18
+    </div>
+
+    <div class="section">
+        <div class="section-title">I. RESUMEN EJECUTIVO</div>
+        
+        <div class="summary-box">
+            <div class="summary-title">Hallazgos Principales</div>
+            <p>El análisis de empleabilidad para el período 2022-2024 demuestra un desempeño excepcional en la colocación laboral de graduados, con tasas de empleo que superan consistentemente los estándares de la industria. Los programas de tecnología y arte digital muestran las tasas más altas de colocación y progresión salarial.</p>
+        </div>
+
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-value">89.6%</div>
+                <div class="metric-label">Tasa de Colocación Promedio</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">$28,500</div>
+                <div class="metric-label">Salario Inicial Promedio</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">94.2%</div>
+                <div class="metric-label">Empleos Relacionados al Campo</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">II. TASAS DE COLOCACIÓN POR PROGRAMA</div>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Programa</th>
+                    <th>2022</th>
+                    <th>2023</th>
+                    <th>2024</th>
+                    <th>Promedio</th>
+                    <th>Meta ACCSC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ingeniería de Audio</td>
+                    <td>92.3%</td>
+                    <td>94.1%</td>
+                    <td>91.7%</td>
+                    <td class="highlight-cell">92.7%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Diseño Gráfico Digital</td>
+                    <td>88.9%</td>
+                    <td>91.2%</td>
+                    <td>89.5%</td>
+                    <td class="highlight-cell">89.9%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Producción Musical</td>
+                    <td>85.7%</td>
+                    <td>87.3%</td>
+                    <td>88.1%</td>
+                    <td class="highlight-cell">87.0%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Fotografía Digital</td>
+                    <td>91.4%</td>
+                    <td>93.2%</td>
+                    <td>90.8%</td>
+                    <td class="highlight-cell">91.8%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Animación 3D</td>
+                    <td>87.5%</td>
+                    <td>89.7%</td>
+                    <td>91.3%</td>
+                    <td class="highlight-cell">89.5%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Cosmetología</td>
+                    <td>86.2%</td>
+                    <td>88.4%</td>
+                    <td>87.9%</td>
+                    <td class="highlight-cell">87.5%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Barbería</td>
+                    <td>89.1%</td>
+                    <td>90.6%</td>
+                    <td>88.7%</td>
+                    <td class="highlight-cell">89.5%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Estética y Spa</td>
+                    <td>84.3%</td>
+                    <td>86.8%</td>
+                    <td>85.9%</td>
+                    <td class="highlight-cell">85.7%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Reparación de Celulares</td>
+                    <td>93.8%</td>
+                    <td>95.2%</td>
+                    <td>94.1%</td>
+                    <td class="highlight-cell">94.4%</td>
+                    <td>70%</td>
+                </tr>
+                <tr>
+                    <td>Técnico en Computadoras</td>
+                    <td>90.7%</td>
+                    <td>92.3%</td>
+                    <td>91.5%</td>
+                    <td class="highlight-cell">91.5%</td>
+                    <td>70%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="chart-placeholder">
+            [Gráfico de Barras: Tasas de Colocación por Programa 2022-2024]
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">III. ANÁLISIS SALARIAL</div>
+        
+        <div class="subsection-title">Salarios Iniciales Promedio por Programa (2024)</div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Programa</th>
+                    <th>Salario Inicial</th>
+                    <th>Rango Salarial</th>
+                    <th>Progresión a 2 Años</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ingeniería de Audio</td>
+                    <td>$32,000</td>
+                    <td>$28,000 - $38,000</td>
+                    <td>$42,000</td>
+                </tr>
+                <tr>
+                    <td>Diseño Gráfico Digital</td>
+                    <td>$29,500</td>
+                    <td>$25,000 - $35,000</td>
+                    <td>$38,000</td>
+                </tr>
+                <tr>
+                    <td>Producción Musical</td>
+                    <td>$30,000</td>
+                    <td>$26,000 - $36,000</td>
+                    <td>$40,000</td>
+                </tr>
+                <tr>
+                    <td>Fotografía Digital</td>
+                    <td>$27,000</td>
+                    <td>$23,000 - $32,000</td>
+                    <td>$35,000</td>
+                </tr>
+                <tr>
+                    <td>Animación 3D</td>
+                    <td>$31,000</td>
+                    <td>$27,000 - $37,000</td>
+                    <td>$41,000</td>
+                </tr>
+                <tr>
+                    <td>Cosmetología</td>
+                    <td>$24,000</td>
+                    <td>$20,000 - $30,000</td>
+                    <td>$32,000</td>
+                </tr>
+                <tr>
+                    <td>Barbería</td>
+                    <td>$26,000</td>
+                    <td>$22,000 - $32,000</td>
+                    <td>$34,000</td>
+                </tr>
+                <tr>
+                    <td>Estética y Spa</td>
+                    <td>$23,500</td>
+                    <td>$20,000 - $28,000</td>
+                    <td>$30,000</td>
+                </tr>
+                <tr>
+                    <td>Reparación de Celulares</td>
+                    <td>$28,000</td>
+                    <td>$24,000 - $34,000</td>
+                    <td>$36,000</td>
+                </tr>
+                <tr>
+                    <td>Técnico en Computadoras</td>
+                    <td>$30,500</td>
+                    <td>$26,000 - $36,000</td>
+                    <td>$39,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">IV. METODOLOGÍA DE INVESTIGACIÓN</div>
+        
+        <div class="methodology-box">
+            <strong>Fuentes de Datos:</strong>
+            <ul>
+                <li>Encuestas de seguimiento a graduados (6 meses y 12 meses post-graduación)</li>
+                <li>Verificación de empleo con empleadores</li>
+                <li>Datos del Departamento del Trabajo de Puerto Rico</li>
+                <li>Plataformas de empleo en línea (LinkedIn, Indeed, Monster)</li>
+            </ul>
+        </div>
+
+        <div class="methodology-box">
+            <strong>Criterios de Colocación:</strong>
+            <ul>
+                <li>Empleo a tiempo completo (30+ horas semanales)</li>
+                <li>Empleo relacionado al campo de estudio (80% o más de las tareas)</li>
+                <li>Empleo verificable con empleador legítimo</li>
+                <li>Autoempleo con ingresos documentados</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">V. ANÁLISIS COMPARATIVO CON LA INDUSTRIA</div>
+        
+        <p>Los datos de empleabilidad del Liceo superan consistentemente los promedios de la industria educativa técnico-vocacional en Puerto Rico. Según el Consejo de Educación de Puerto Rico, la tasa promedio de colocación para instituciones similares es del 76.3%, mientras que nuestro promedio institucional es del 89.6%.</p>
+
+        <div class="chart-placeholder">
+            [Gráfico Comparativo: Liceo vs. Promedio de la Industria]
+        </div>
+    </div>
+
+    <div class="footer-info">
+        <p><strong>Liceo de Arte y Tecnología de Puerto Rico</strong><br>
+        Oficina de Efectividad Estudiantil<br>
+        Tel: (787) 725-4120 | Web: www.liceo.edu</p>
+        
+        <p style="margin-top: 15px; font-style: italic;">
+        Documento preparado para el proceso de reacreditación ACCSC 2025-2026.<br>
+        Analista: María González, Coordinadora de Efectividad Estudiantil | Fecha: Enero 2025
+        </p>
+    </div>
+</body>
+</html>
+
